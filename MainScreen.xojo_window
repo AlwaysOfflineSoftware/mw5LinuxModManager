@@ -506,7 +506,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Function ConstructContextualMenu(base As DesktopMenuItem, x As Integer, y As Integer) As Boolean
-		   base.AddMenu(New MenuItem("Edit"))
+		  base.AddMenu(New MenuItem("Edit"))
 		End Function
 	#tag EndEvent
 	#tag Event

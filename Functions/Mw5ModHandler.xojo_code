@@ -19,33 +19,37 @@ Protected Module Mw5ModHandler
 	#tag Method, Flags = &h0
 		Sub BackupOriginal()
 		  // Steam Mods
-		  For Each item As FolderItem In App.steamModsFile.Children
-		    If(item.DisplayName.Contains(".")) Then
-		      Continue
-		    Else
-		      If(App.steamModsFile.child(item.Name).child("mod.json.bak").Exists) then
+		  
+		  If(App.steamModsFile.Exists) Then
+		    For Each item As FolderItem In App.steamModsFile.Children
+		      If(item.DisplayName.Contains(".")) Then
 		        Continue
 		      Else
-		        App.steamModsFile.child(item.Name).child("mod.json")._
-		        CopyTo(App.steamModsFile.child(item.Name).child("mod.json.bak"))
+		        If(App.steamModsFile.child(item.Name).child("mod.json.bak").Exists) then
+		          Continue
+		        Else
+		          App.steamModsFile.child(item.Name).child("mod.json")._
+		          CopyTo(App.steamModsFile.child(item.Name).child("mod.json.bak"))
+		        End
 		      End
-		    End
-		  Next
+		    Next
+		  End
 		  
 		  // Manual Mods
-		  For Each item As FolderItem In App.manualModsFile.Children
-		    If(item.DisplayName.Contains(".")) Then
-		      Continue
-		    Else
-		      If(App.manualModsFile.child(item.Name).child("mod.json.bak").Exists) Then
+		  If(App.manualModsFile.Exists) Then
+		    For Each item As FolderItem In App.manualModsFile.Children
+		      If(item.DisplayName.Contains(".")) Then
 		        Continue
 		      Else
-		        App.manualModsFile.child(item.Name).child("mod.json")._
-		        CopyTo(App.manualModsFile.child(item.Name).child("mod.json.bak"))
+		        If(App.manualModsFile.child(item.Name).child("mod.json.bak").Exists) Then
+		          Continue
+		        Else
+		          App.manualModsFile.child(item.Name).child("mod.json")._
+		          CopyTo(App.manualModsFile.child(item.Name).child("mod.json.bak"))
+		        End
 		      End
-		    End
-		  Next
-		  
+		    Next
+		  End
 		  
 		  
 		End Sub
@@ -53,21 +57,22 @@ Protected Module Mw5ModHandler
 
 	#tag Method, Flags = &h0
 		Sub CheckEnabled()
-		  Var enabledFileContents As String= Utils.ReadFile(App.enabledModsFile.NativePath)
-		  Var name As String
 		  
-		  For row As Integer=0 To MainScreen.lsb_ModOrderList.RowCount-1
-		    name= MainScreen.lsb_ModOrderList.CellTextAt(row,2).Trim
-		    // System.DebugLog(name)
-		    If(enabledFileContents.Contains(name)) Then
-		      MainScreen.lsb_ModOrderList.CellTextAt(row,0)="Y"
-		    Else
-		      MainScreen.lsb_ModOrderList.CellTextAt(row,0)=" "
-		    End
+		  If(App.enabledModsFile.Exists) Then
+		    Var enabledFileContents As String= Utils.ReadFile(App.enabledModsFile.NativePath)
+		    Var name As String
 		    
-		  Next
-		  
-		  
+		    For row As Integer=0 To MainScreen.lsb_ModOrderList.RowCount-1
+		      name= MainScreen.lsb_ModOrderList.CellTextAt(row,2).Trim
+		      // System.DebugLog(name)
+		      If(enabledFileContents.Contains(name)) Then
+		        MainScreen.lsb_ModOrderList.CellTextAt(row,0)="Y"
+		      Else
+		        MainScreen.lsb_ModOrderList.CellTextAt(row,0)=" "
+		      End
+		      
+		    Next
+		  End
 		End Sub
 	#tag EndMethod
 
@@ -124,28 +129,32 @@ Protected Module Mw5ModHandler
 		  MainScreen.lsb_ModOrderList.RemoveAllRows
 		  
 		  // Steam Mods
-		  For Each item As FolderItem In App.steamModsFile.Children
-		    If(item.DisplayName.Contains(".")) Then
-		      Continue
-		    Else
-		      // System.DebugLog(App.steamModsFile.child(item.Name).child("mod.json").NativePath)
-		      
-		      App.modLocationMap.Value(App.steamModsFile.child(item.Name).child("mod.json").NativePath)=_
-		      ParseJSON(Utils.ReadFile(App.steamModsFile.child(item.Name).child("mod.json").NativePath))
-		    End
-		  Next
+		  If(App.steamModsFile.Exists) Then
+		    For Each item As FolderItem In App.steamModsFile.Children
+		      If(item.DisplayName.Contains(".")) Then
+		        Continue
+		      Else
+		        // System.DebugLog(App.steamModsFile.child(item.Name).child("mod.json").NativePath)
+		        
+		        App.modLocationMap.Value(App.steamModsFile.child(item.Name).child("mod.json").NativePath)=_
+		        ParseJSON(Utils.ReadFile(App.steamModsFile.child(item.Name).child("mod.json").NativePath))
+		      End
+		    Next
+		  End
 		  
 		  // Manual Mods
-		  For Each item As FolderItem In App.manualModsFile.Children
-		    If(item.DisplayName.Contains(".")) Then
-		      Continue
-		    Else
-		      // System.DebugLog(App.manualModsFile.child(item.Name).child("mod.json").NativePath)
-		      
-		      App.modLocationMap.Value(App.manualModsFile.child(item.Name).child("mod.json").NativePath)=_
-		      ParseJSON(Utils.ReadFile(App.manualModsFile.child(item.Name).child("mod.json").NativePath))
-		    End
-		  Next
+		  If(App.manualModsFile.Exists) Then
+		    For Each item As FolderItem In App.manualModsFile.Children
+		      If(item.DisplayName.Contains(".")) Then
+		        Continue
+		      Else
+		        // System.DebugLog(App.manualModsFile.child(item.Name).child("mod.json").NativePath)
+		        
+		        App.modLocationMap.Value(App.manualModsFile.child(item.Name).child("mod.json").NativePath)=_
+		        ParseJSON(Utils.ReadFile(App.manualModsFile.child(item.Name).child("mod.json").NativePath))
+		      End
+		    Next
+		  End
 		  
 		  // Populate
 		  For Each modKey As String In App.modLocationMap.Keys

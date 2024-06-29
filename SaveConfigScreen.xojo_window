@@ -204,7 +204,7 @@ End
 		  
 		  If(Self.txt_PresetName.Text.Trim<>""And _ 
 		    Not Self.txt_PresetName.Text.IsNumeric And _
-		     Not Self.txt_PresetName.Text.contains(".")) Then
+		    Not Self.txt_PresetName.Text.contains(".")) Then
 		    
 		    SharedModTools.SaveModLoadout(Self.txt_PresetName.Text.Trim)
 		    

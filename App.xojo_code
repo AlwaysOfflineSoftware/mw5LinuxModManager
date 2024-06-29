@@ -29,9 +29,13 @@ Inherits DesktopApplication
 		    manualModsFile= New FolderItem(settingsArr(0))
 		    steamModsFile= New FolderItem(settingsArr(1))
 		  End
-		  enabledModsFile= manualModsFile.child("modlist.json")
 		  
-		  System.DebugLog(steamModsFile.NativePath)
+		  If(manualModsFile.Exists) Then
+		    enabledModsFile= manualModsFile.child("modlist.json")
+		  Else
+		    Utils.ErrorHandler(3,"No Mod Dir found", "Please create a mod dir in Mechwarrior Steam directory")
+		    Quit()
+		  End
 		  
 		  modIDMap= New Dictionary
 		  modLocationMap= New Dictionary
