@@ -6,15 +6,17 @@ Inherits DesktopApplication
 		  // ~/.steam/steam/steamapps/common/MechWarrior 5 Mercenaries/MW5Mercs/Mods
 		  // ~/.steam/steam/steamapps/workshop/content/784080
 		  
-		  BaseDir= SpecialFolder.UserHome.child(".steam").Child("steam")_
-		  .Child("steamapps")
-		  
-		  manualModsFile= BaseDir.Child("common").Child("MechWarrior 5 Mercenaries")_
-		  .Child("MW5Mercs").Child("Mods")
-		  
-		  enabledModsFile= manualModsFile.child("modlist.json")
-		  
-		  steamModsFile= BaseDir.Child("workshop").Child("content").Child("784080")
+		  If(SpecialFolder.UserHome.child(".steam").Exists) Then
+		    BaseDir= SpecialFolder.UserHome.child(".steam").Child("steam")_
+		    .Child("steamapps")
+		    
+		    manualModsFile= BaseDir.Child("common").Child("MechWarrior 5 Mercenaries")_
+		    .Child("MW5Mercs").Child("Mods")
+		    
+		    enabledModsFile= manualModsFile.child("modlist.json")
+		    
+		    steamModsFile= BaseDir.Child("workshop").Child("content").Child("784080")
+		  End
 		  
 		  savedConfigs= Utils.CreateFolderStructure(SpecialFolder.UserHome,_
 		  ".config/AlwaysOfflineSoftware/MW5LinuxModder/")
@@ -77,7 +79,7 @@ Inherits DesktopApplication
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		steamUser As Boolean
+		steamUser As Boolean = True
 	#tag EndProperty
 
 

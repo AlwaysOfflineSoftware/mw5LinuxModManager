@@ -163,12 +163,20 @@ Protected Module Mw5ModHandler
 		      modName= tempDict.Lookup("displayName","ERR")
 		      modOrder= tempDict.Lookup("defaultLoadOrder","ERR")
 		      
-		      If(modKey.Contains(App.steamModsFile.NativePath)) Then
-		        MainScreen.lsb_ModOrderList.AddRow("",modID.ToString,_
-		        modName.Replace(",","").Trim,_
-		        modOrder.ReplaceAll(",","").ReplaceAll(".0","").Trim,"Y")
-		        App.modIDMap.Value(modID)=modName.Replace(",","").Trim
-		        modID= modID+1
+		      If(App.steamUser) Then
+		        If(modKey.Contains(App.steamModsFile.NativePath)) Then
+		          MainScreen.lsb_ModOrderList.AddRow("",modID.ToString,_
+		          modName.Replace(",","").Trim,_
+		          modOrder.ReplaceAll(",","").ReplaceAll(".0","").Trim,"Y")
+		          App.modIDMap.Value(modID)=modName.Replace(",","").Trim
+		          modID= modID+1
+		        Else
+		          MainScreen.lsb_ModOrderList.AddRow("",modID.ToString,_
+		          modName.Replace(",","").Trim,_
+		          modOrder.ReplaceAll(",","").ReplaceAll(".0","").Trim," ")
+		          App.modIDMap.Value(modID)=modName.Replace(",","").Trim
+		          modID= modID+1
+		        End
 		      Else
 		        MainScreen.lsb_ModOrderList.AddRow("",modID.ToString,_
 		        modName.Replace(",","").Trim,_

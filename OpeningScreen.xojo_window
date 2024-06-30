@@ -402,10 +402,10 @@ End
 		    txt_SteamModsFolder.Text=settingsArr(1)
 		  End
 		  
-		  // If(App.BaseDir.Exists And app.steamModsFile.Exists And app.manualModsFile.Exists) Then
-		  // MainScreen.show
-		  // OpeningScreen.close
-		  // End
+		  If(SpecialFolder.UserHome.child(".steam").Exists) Then
+		    MainScreen.show
+		    OpeningScreen.close
+		  End
 		  
 		End Sub
 	#tag EndEvent
