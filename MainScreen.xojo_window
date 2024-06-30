@@ -466,7 +466,7 @@ End
 
 	#tag MenuHandler
 		Function HelpNexusPage() As Boolean Handles HelpNexusPage.Action
-		  System.GotoURL("")
+		  System.GotoURL("https://www.nexusmods.com/mechwarrior5mercenaries/mods/1128?tab=description")
 		  
 		End Function
 	#tag EndMenuHandler
