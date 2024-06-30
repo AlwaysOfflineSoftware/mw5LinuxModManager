@@ -1,5 +1,5 @@
 #tag DesktopWindow
-Begin DesktopWindow SettingsScreen
+Begin DesktopWindow OpeningScreen
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF
    Composite       =   False
@@ -10,7 +10,7 @@ Begin DesktopWindow SettingsScreen
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   182
+   Height          =   176
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
@@ -20,8 +20,8 @@ Begin DesktopWindow SettingsScreen
    MinimumHeight   =   64
    MinimumWidth    =   64
    Resizeable      =   False
-   Title           =   "Settings"
-   Type            =   1
+   Title           =   "Setup"
+   Type            =   0
    Visible         =   True
    Width           =   736
    Begin DesktopTextField txt_NexusModFolder
@@ -58,12 +58,12 @@ Begin DesktopWindow SettingsScreen
       TextAlignment   =   0
       TextColor       =   &c000000
       Tooltip         =   ""
-      Top             =   20
+      Top             =   52
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   460
+      Width           =   452
    End
    Begin DesktopTextField txt_SteamModsFolder
       AllowAutoDeactivate=   True
@@ -99,12 +99,12 @@ Begin DesktopWindow SettingsScreen
       TextAlignment   =   0
       TextColor       =   &c000000
       Tooltip         =   ""
-      Top             =   59
+      Top             =   91
       Transparent     =   False
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   520
+      Width           =   512
    End
    Begin DesktopLabel lbl_Nexus
       AllowAutoDeactivate=   True
@@ -132,7 +132,7 @@ Begin DesktopWindow SettingsScreen
       TextAlignment   =   0
       TextColor       =   &c000000
       Tooltip         =   ""
-      Top             =   20
+      Top             =   52
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -164,7 +164,7 @@ Begin DesktopWindow SettingsScreen
       TextAlignment   =   0
       TextColor       =   &c000000
       Tooltip         =   ""
-      Top             =   59
+      Top             =   91
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -183,7 +183,7 @@ Begin DesktopWindow SettingsScreen
       Height          =   26
       Index           =   -2147483648
       Italic          =   False
-      Left            =   644
+      Left            =   636
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -195,7 +195,7 @@ Begin DesktopWindow SettingsScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   59
+      Top             =   91
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -214,7 +214,7 @@ Begin DesktopWindow SettingsScreen
       Height          =   26
       Index           =   -2147483648
       Italic          =   False
-      Left            =   644
+      Left            =   636
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -226,17 +226,17 @@ Begin DesktopWindow SettingsScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   20
+      Top             =   52
       Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopButton btn_Apply
+   Begin DesktopButton btn_Next
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
-      Caption         =   "Apply"
+      Caption         =   "Next"
       Default         =   True
       Enabled         =   True
       FontName        =   "Liberation Sans"
@@ -257,7 +257,7 @@ Begin DesktopWindow SettingsScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   136
+      Top             =   129
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -288,7 +288,7 @@ Begin DesktopWindow SettingsScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   136
+      Top             =   130
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -307,7 +307,7 @@ Begin DesktopWindow SettingsScreen
       Height          =   26
       Index           =   -2147483648
       Italic          =   False
-      Left            =   20
+      Left            =   636
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -319,42 +319,11 @@ Begin DesktopWindow SettingsScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   98
+      Top             =   130
       Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   80
-   End
-   Begin DesktopButton btn_HardReset
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "RESET MODS"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   26
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   597
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   9
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   "Did you mess something up so bad you wish you could just take it all back? If so please press this!"
-      Top             =   136
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   127
    End
    Begin DesktopLabel lbl_status
       AllowAutoDeactivate=   True
@@ -366,7 +335,7 @@ Begin DesktopWindow SettingsScreen
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   204
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -378,15 +347,15 @@ Begin DesktopWindow SettingsScreen
       TabIndex        =   10
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   " "
+      Text            =   "Auto-detect Failed, Please Select directories"
       TextAlignment   =   0
       TextColor       =   &c000000
       Tooltip         =   ""
-      Top             =   104
+      Top             =   20
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   512
+      Width           =   696
    End
    Begin DesktopCheckBox chk_NotSteamUser
       AllowAutoDeactivate=   True
@@ -396,21 +365,21 @@ Begin DesktopWindow SettingsScreen
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
-      Height          =   26
+      Height          =   22
       Index           =   -2147483648
       Italic          =   False
-      Left            =   212
+      Left            =   482
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      Scope           =   0
+      Scope           =   2
       TabIndex        =   11
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   136
+      Top             =   130
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -433,7 +402,11 @@ End
 		    txt_SteamModsFolder.Text=settingsArr(1)
 		  End
 		  
-		  Self.chk_NotSteamUser.value= Not App.steamUser
+		  // If(App.BaseDir.Exists And app.steamModsFile.Exists And app.manualModsFile.Exists) Then
+		  // MainScreen.show
+		  // OpeningScreen.close
+		  // End
+		  
 		End Sub
 	#tag EndEvent
 
@@ -457,27 +430,28 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events btn_Apply
+#tag Events btn_Next
 	#tag Event
 		Sub Pressed()
 		  If(Self.txt_NexusModFolder.Text.Trim<>"" And Self.txt_SteamModsFolder.Text.Trim<>"") Then
 		    Utils.WriteFile(App.savedSettings,Self.txt_NexusModFolder.Text,True)
-		    If(Self.chk_NotSteamUser.Value= True) Then
-		      App.steamUser= False
+		    Utils.WriteFile(App.savedSettings,Self.txt_SteamModsFolder.Text,False)
+		    
+		    App.manualModsFile= New FolderItem(Self.txt_NexusModFolder.Text.Trim)
+		    App.enabledModsFile= App.manualModsFile.Child("modlist.json")
+		    
+		    If(chk_NotSteamUser.Value=False) Then
+		      App.steamModsFile= New FolderItem(Self.txt_SteamModsFolder.Text.Trim)
 		    Else
-		      App.steamUser= True
-		      Utils.WriteFile(App.savedSettings,Self.txt_SteamModsFolder.Text,False)
+		      App.steamUser=False
 		    End
 		    
-		    lbl_status.Text="Saved Successfully"
-		    
-		    Mw5ModHandler.ReloadMods
-		    SettingsScreen.close
+		    MainScreen.show
+		    OpeningScreen.Close
 		    
 		  Else
-		    lbl_status.Text="Fields cannot be empty"
+		    lbl_status.Text="Fields cannot be empty or Invalid"
 		  End
-		  
 		  
 		  
 		  
@@ -487,7 +461,7 @@ End
 #tag Events btn_Cancel
 	#tag Event
 		Sub Pressed()
-		  SettingsScreen.Close
+		  OpeningScreen.Close
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -499,13 +473,6 @@ End
 		  
 		  txt_SteamModsFolder.Text=App.BaseDir.Child("workshop").Child("content").Child("784080").NativePath
 		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btn_HardReset
-	#tag Event
-		Sub Pressed()
-		  Mw5ModHandler.RevertToOriginal
 		End Sub
 	#tag EndEvent
 #tag EndEvents

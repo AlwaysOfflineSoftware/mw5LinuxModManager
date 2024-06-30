@@ -9,36 +9,26 @@ Inherits DesktopApplication
 		  BaseDir= SpecialFolder.UserHome.child(".steam").Child("steam")_
 		  .Child("steamapps")
 		  
+		  manualModsFile= BaseDir.Child("common").Child("MechWarrior 5 Mercenaries")_
+		  .Child("MW5Mercs").Child("Mods")
+		  
+		  enabledModsFile= manualModsFile.child("modlist.json")
+		  
+		  steamModsFile= BaseDir.Child("workshop").Child("content").Child("784080")
+		  
 		  savedConfigs= Utils.CreateFolderStructure(SpecialFolder.UserHome,_
 		  ".config/AlwaysOfflineSoftware/MW5LinuxModder/")
+		  
+		  modIDMap= New Dictionary
+		  modLocationMap= New Dictionary
 		  
 		  If(Not savedConfigs.child("settings.ini").Exists) Then
 		    Utils.WriteFile(savedConfigs.child("settings.ini"),"", True)
 		  End
 		  
 		  savedSettings= savedConfigs.child("settings.ini")
-		  
 		  Var settingsArr() As String= Utils.ReadFile(App.savedSettings.NativePath).Split(EndOfLine)
 		  
-		  If(settingsArr(0)="") Then
-		    manualModsFile= BaseDir.Child("common").Child("MechWarrior 5 Mercenaries")_
-		    .Child("MW5Mercs").Child("Mods")
-		    
-		    steamModsFile= BaseDir.Child("workshop").Child("content").Child("784080")
-		  Else
-		    manualModsFile= New FolderItem(settingsArr(0))
-		    steamModsFile= New FolderItem(settingsArr(1))
-		  End
-		  
-		  If(manualModsFile.Exists) Then
-		    enabledModsFile= manualModsFile.child("modlist.json")
-		  Else
-		    Utils.ErrorHandler(3,"No Mod Dir found", "Please create a mod dir in Mechwarrior Steam directory")
-		    Quit()
-		  End
-		  
-		  modIDMap= New Dictionary
-		  modLocationMap= New Dictionary
 		  
 		  
 		  
@@ -84,6 +74,10 @@ Inherits DesktopApplication
 
 	#tag Property, Flags = &h0
 		steamModsFile As Folderitem
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		steamUser As Boolean
 	#tag EndProperty
 
 

@@ -20,7 +20,7 @@ Protected Module Mw5ModHandler
 		Sub BackupOriginal()
 		  // Steam Mods
 		  
-		  If(App.steamModsFile.Exists) Then
+		  If(App.SteamUser And App.steamModsFile.Exists) Then
 		    For Each item As FolderItem In App.steamModsFile.Children
 		      If(item.DisplayName.Contains(".")) Then
 		        Continue
@@ -129,7 +129,7 @@ Protected Module Mw5ModHandler
 		  MainScreen.lsb_ModOrderList.RemoveAllRows
 		  
 		  // Steam Mods
-		  If(App.steamModsFile.Exists) Then
+		  If(App.steamUser And App.steamModsFile.Exists) Then
 		    For Each item As FolderItem In App.steamModsFile.Children
 		      If(item.DisplayName.Contains(".")) Then
 		        Continue
@@ -195,18 +195,20 @@ Protected Module Mw5ModHandler
 	#tag Method, Flags = &h0
 		Sub RevertToOriginal()
 		  // Steam Mods
-		  For Each item As FolderItem In App.steamModsFile.Children
-		    If(item.DisplayName.Contains(".")) Then
-		      Continue
-		    Else
-		      If(App.steamModsFile.child(item.Name).child("mod.json.bak").Exists) Then
-		        App.steamModsFile.child(item.Name).child("mod.json").remove
-		        
-		        App.steamModsFile.child(item.Name).child("mod.json.bak")_
-		        .CopyTo(App.steamModsFile.child(item.Name).child("mod.json"))
+		  If(App.SteamUser) Then
+		    For Each item As FolderItem In App.steamModsFile.Children
+		      If(item.DisplayName.Contains(".")) Then
+		        Continue
+		      Else
+		        If(App.steamModsFile.child(item.Name).child("mod.json.bak").Exists) Then
+		          App.steamModsFile.child(item.Name).child("mod.json").remove
+		          
+		          App.steamModsFile.child(item.Name).child("mod.json.bak")_
+		          .CopyTo(App.steamModsFile.child(item.Name).child("mod.json"))
+		        End
 		      End
-		    End
-		  Next
+		    Next
+		  End
 		  
 		  // Manual Mods
 		  For Each item As FolderItem In App.manualModsFile.Children
