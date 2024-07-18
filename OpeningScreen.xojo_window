@@ -382,6 +382,7 @@ Begin DesktopWindow OpeningScreen
       Top             =   130
       Transparent     =   False
       Underline       =   False
+      Value           =   False
       Visible         =   True
       VisualState     =   0
       Width           =   142

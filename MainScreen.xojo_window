@@ -225,37 +225,6 @@ Begin DesktopWindow MainScreen
       Visible         =   True
       Width           =   122
    End
-   Begin DesktopButton btn_sort
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "Sort"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "Liberation Sans"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   26
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   20
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   10
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   "By Load Order"
-      Top             =   96
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
    Begin DesktopButton btn_SaveLoadout
       AllowAutoDeactivate=   True
       Bold            =   False
@@ -270,11 +239,11 @@ Begin DesktopWindow MainScreen
       Index           =   -2147483648
       Italic          =   False
       Left            =   310
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
-      LockTop         =   True
+      LockTop         =   False
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   11
@@ -301,11 +270,11 @@ Begin DesktopWindow MainScreen
       Index           =   -2147483648
       Italic          =   False
       Left            =   415
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
-      LockTop         =   True
+      LockTop         =   False
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   12
@@ -330,11 +299,11 @@ Begin DesktopWindow MainScreen
       InitialValue    =   "<new>"
       Italic          =   False
       Left            =   125
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
-      LockTop         =   True
+      LockTop         =   False
       Scope           =   0
       SelectedRowIndex=   0
       TabIndex        =   13
@@ -361,11 +330,11 @@ Begin DesktopWindow MainScreen
       Index           =   -2147483648
       Italic          =   False
       Left            =   520
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
-      LockTop         =   True
+      LockTop         =   False
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   14
@@ -387,11 +356,11 @@ Begin DesktopWindow MainScreen
       Index           =   -2147483648
       InitialParent   =   ""
       Left            =   630
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
+      LockRight       =   True
+      LockTop         =   False
       PanelIndex      =   0
       Scope           =   2
       TabIndex        =   15
@@ -506,7 +475,13 @@ End
 	#tag EndEvent
 	#tag Event
 		Function ConstructContextualMenu(base As DesktopMenuItem, x As Integer, y As Integer) As Boolean
-		  base.AddMenu(New MenuItem("Edit"))
+		  If y<=Me.RowHeight Then
+		    Return True
+		  Else
+		    base.AddMenu(New MenuItem("Edit"))
+		  End
+		  
+		  
 		End Function
 	#tag EndEvent
 	#tag Event
@@ -517,6 +492,36 @@ End
 		  End Select
 		  
 		  Return True
+		End Function
+	#tag EndEvent
+	#tag Event
+		Function RowComparison(row1 as Integer, row2 as Integer, column as Integer, ByRef result as Integer) As Boolean
+		  Select Case column
+		    
+		  Case 1 ' This is our numerical value column. Let's do the work ourselves
+		    If Me.CellTextAt(row1, column ).Val < Me.CellTextAt(row2, column).Val Then
+		      result = -1
+		    ElseIf Me.CellTextAt(row1, column).Val > Me.CellTextAt(row2, column).Val Then
+		      result = 1
+		    Else
+		      result = 0
+		    End If
+		    Return True
+		    
+		    
+		  Case 3 ' This is our numerical value column. Let's do the work ourselves
+		    If Me.CellTextAt(row1, column ).Val < Me.CellTextAt(row2, column).Val Then
+		      result = -1
+		    ElseIf Me.CellTextAt(row1, column).Val > Me.CellTextAt(row2, column).Val Then
+		      result = 1
+		    Else
+		      result = 0
+		    End If
+		    Return True
+		    
+		  Else //some other column for which we let the listbox handle string comparison
+		    Return False
+		  End Select
 		End Function
 	#tag EndEvent
 #tag EndEvents
@@ -552,14 +557,6 @@ End
 	#tag Event
 		Sub Pressed()
 		  Utils.ShellCommand("steam steam://rungameid/784080",False,True)
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btn_sort
-	#tag Event
-		Sub Pressed()
-		  MainScreen.lsb_ModOrderList.SortingColumn=3
-		  MainScreen.lsb_ModOrderList.Sort
 		End Sub
 	#tag EndEvent
 #tag EndEvents

@@ -413,6 +413,7 @@ Begin DesktopWindow SettingsScreen
       Top             =   136
       Transparent     =   False
       Underline       =   False
+      Value           =   False
       Visible         =   True
       VisualState     =   0
       Width           =   142
