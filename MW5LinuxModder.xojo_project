@@ -1,7 +1,7 @@
 Type=Desktop
-RBProjectVersion=2024.02
+RBProjectVersion=2024.021
 MinIDEVersion=20210300
-OrigIDEVersion=20240200
+OrigIDEVersion=20240201
 Class=App;App.xojo_code;&h000000001B8357FF;&h0000000000000000;false
 MenuBar=MainMenuBar;MainMenuBar.xojo_menu;&h0000000051D00FFF;&h0000000000000000;false
 DesktopWindow=OpeningScreen;OpeningScreen.xojo_window;&h000000000C9767FF;&h0000000000000000;false
@@ -16,7 +16,6 @@ Folder=Functions;Functions;&h000000004F2F87FF;&h0000000000000000;false
 Folder=CustomControls;CustomControls;&h000000006925E7FF;&h0000000000000000;false
 Folder=Assets;Assets;&h0000000017ACCFFF;&h0000000000000000;false
 Module=Mw5ModHandler;Functions/Mw5ModHandler.xojo_code;&h0000000011E9D7FF;&h000000004F2F87FF;false
-Module=SkyrimModHandler;Functions/SkyrimModHandler.xojo_code;&h000000000B2EBFFF;&h000000004F2F87FF;false
 Module=SharedModTools;Functions/SharedModTools.xojo_code;&h00000000043C6FFF;&h000000004F2F87FF;false
 Module=Utils;Functions/Utils.xojo_code;&h000000007CF497FF;&h000000004F2F87FF;false
 MultiImage=img_XojoLogo;Assets/img_XojoLogo.xojo_image;&h000000005BA5FFFF;&h0000000017ACCFFF;false

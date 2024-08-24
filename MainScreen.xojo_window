@@ -375,6 +375,37 @@ Begin DesktopWindow MainScreen
       _mName          =   ""
       _mPanelIndex    =   0
    End
+   Begin DesktopButton btn_Toggle
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Toggle"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   26
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   16
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   "Activate or disable a mod"
+      Top             =   224
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
 End
 #tag EndDesktopWindow
 
@@ -467,10 +498,11 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub DoublePressed()
-		  
-		  OrderInputScreen.show
-		  
-		  
+		  If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y") Then
+		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)=" "
+		  Else
+		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y"
+		  End
 		End Sub
 	#tag EndEvent
 	#tag Event
@@ -529,6 +561,7 @@ End
 	#tag Event
 		Sub Pressed()
 		  Mw5ModHandler.ApplyLoadOrder
+		  Mw5ModHandler.ApplyEnabled
 		  
 		  If(Not App.savedConfigs.child("default.txt").Exists) Then
 		    Utils.WriteFile(App.savedConfigs.child("default.txt"), "", True)
@@ -606,6 +639,17 @@ End
 		    Self.pop_SavedLoadouts.SelectedRowIndex= 0
 		  End
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_Toggle
+	#tag Event
+		Sub Pressed()
+		  If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y") Then
+		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)=" "
+		  Else
+		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y"
+		  End
 		End Sub
 	#tag EndEvent
 #tag EndEvents

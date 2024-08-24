@@ -201,21 +201,26 @@ End
 	#tag Event
 		Sub Pressed()
 		  Var addThisRow As Boolean= False
+		  Var presetName As String= Self.txt_PresetName.Text.Trim
 		  
-		  If(Self.txt_PresetName.Text.Trim<>""And _ 
-		    Not Self.txt_PresetName.Text.IsNumeric And _
-		    Not Self.txt_PresetName.Text.contains(".")) Then
+		  If(presetName<>""And _ 
+		    Not presetName.IsNumeric And _
+		    Not presetName.contains(".")) Then
 		    
-		    SharedModTools.SaveModLoadout(Self.txt_PresetName.Text.Trim)
+		    SharedModTools.SaveModLoadout(presetName)
 		    
-		    For rowNum As Integer= 0 To MainScreen.pop_SavedLoadouts.RowCount
-		      If(MainScreen.pop_SavedLoadouts.RowTextAt(rowNum)=Self.txt_PresetName.Text.Trim) Then
-		        addThisRow= True
-		      End
-		    Next
+		    If(MainScreen.pop_SavedLoadouts.RowCount>1) Then
+		      For rowNum As Integer= 0 To MainScreen.pop_SavedLoadouts.RowCount-1
+		        If(MainScreen.pop_SavedLoadouts.RowTextAt(rowNum)=presetName) Then
+		          addThisRow= True
+		        End
+		      Next
+		    Else
+		      addThisRow= True
+		    End
 		    
 		    If(addThisRow) Then
-		      MainScreen.pop_SavedLoadouts.AddRow(Self.txt_PresetName.Text.Trim)
+		      MainScreen.pop_SavedLoadouts.AddRow(presetName)
 		    End
 		    
 		    SaveConfigScreen.Close
@@ -223,6 +228,9 @@ End
 		  Else
 		    Self.lbl_Status.Text="Name cannot be numeric, contian '.' or be empty" 
 		  End
+		  
+		  SharedModTools.populateLoadouts
+		  MainScreen.pop_SavedLoadouts.SelectRowWithText(presetName)
 		End Sub
 	#tag EndEvent
 #tag EndEvents

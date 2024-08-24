@@ -59,7 +59,7 @@ Inherits DesktopApplication
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		modLocationMap As Dictionary
+		modLocationMap As dictionary
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

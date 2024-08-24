@@ -1,6 +1,33 @@
 #tag Module
 Protected Module Mw5ModHandler
 	#tag Method, Flags = &h0
+		Sub ApplyEnabled()
+		  Var enabledFileContent As Dictionary= New Dictionary
+		  Var enabledModContent As Dictionary= New Dictionary
+		  Var enabledDefaultContent As Dictionary= New Dictionary
+		  Var finalContent As String
+		  
+		  enabledDefaultContent.Value("bEnabled")= True
+		  
+		  enabledFileContent.Value("gameVersion")= "1.1.361"
+		  
+		  For row As Integer= 0 To MainScreen.lsb_ModOrderList.RowCount-1
+		    If(MainScreen.lsb_ModOrderList.CellTextAt(row,0)="Y") Then
+		      enabledModContent.Value(MainScreen.lsb_ModOrderList.CellTextAt(row,2).ReplaceAll(" ", "").Trim)= _
+		      enabledDefaultContent
+		    End
+		  Next 
+		  
+		  enabledFileContent.Value("modStatus")= enabledModContent
+		  
+		  finalContent= GenerateJSON(enabledFileContent,True)
+		  
+		  Utils.WriteFile(app.enabledModsFile, finalContent, True)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub ApplyLoadOrder()
 		  Var tempDict As Dictionary 
 		  Var tempFItem As FolderItem
@@ -12,6 +39,8 @@ Protected Module Mw5ModHandler
 		    Utils.WriteFile(tempFItem,GenerateJSON(tempDict,True),True)
 		    
 		  Next
+		  
+		  
 		  
 		End Sub
 	#tag EndMethod
@@ -63,12 +92,13 @@ Protected Module Mw5ModHandler
 		    Var name As String
 		    
 		    For row As Integer=0 To MainScreen.lsb_ModOrderList.RowCount-1
-		      name= MainScreen.lsb_ModOrderList.CellTextAt(row,2).Trim
-		      // System.DebugLog(name)
+		      name= MainScreen.lsb_ModOrderList.CellTextAt(row,2).ReplaceAll(" ", "").Trim
 		      If(enabledFileContents.Contains(name)) Then
 		        MainScreen.lsb_ModOrderList.CellTextAt(row,0)="Y"
+		        // System.DebugLog(name + " TRUE")
 		      Else
 		        MainScreen.lsb_ModOrderList.CellTextAt(row,0)=" "
+		        // System.DebugLog(name + " FALSE")
 		      End
 		      
 		    Next
@@ -83,12 +113,14 @@ Protected Module Mw5ModHandler
 		  Var modID As Integer
 		  Var steamMod As Boolean= False
 		  Var tempDict As Dictionary 
+		  Var pathString() As String
 		  
 		  // Populate
 		  For Each modKey As String In App.modLocationMap.Keys
+		    pathString= modkey.Split("/")
 		    tempDict= App.modLocationMap.Value(modKey)
 		    If(tempDict.HasKey("displayName") And tempDict.HasKey("defaultLoadOrder")) Then
-		      modName= tempDict.Lookup("displayName","ERR")
+		      modName= pathString(pathString.LastIndex-1) //tempDict.Lookup("displayName","ERR")
 		      modOrder= tempDict.Lookup("defaultLoadOrder","ERR")
 		      
 		      If(modKey.Contains(App.steamModsFile.NativePath)) Then
@@ -125,6 +157,7 @@ Protected Module Mw5ModHandler
 		  Var modID As Integer
 		  Var steamMod As Boolean= False
 		  Var tempDict As Dictionary 
+		  Var pathString() As String
 		  
 		  MainScreen.lsb_ModOrderList.RemoveAllRows
 		  
@@ -135,7 +168,6 @@ Protected Module Mw5ModHandler
 		        Continue
 		      Else
 		        // System.DebugLog(App.steamModsFile.child(item.Name).child("mod.json").NativePath)
-		        
 		        App.modLocationMap.Value(App.steamModsFile.child(item.Name).child("mod.json").NativePath)=_
 		        ParseJSON(Utils.ReadFile(App.steamModsFile.child(item.Name).child("mod.json").NativePath))
 		      End
@@ -148,19 +180,19 @@ Protected Module Mw5ModHandler
 		      If(item.DisplayName.Contains(".")) Then
 		        Continue
 		      Else
-		        // System.DebugLog(App.manualModsFile.child(item.Name).child("mod.json").NativePath)
-		        
 		        App.modLocationMap.Value(App.manualModsFile.child(item.Name).child("mod.json").NativePath)=_
 		        ParseJSON(Utils.ReadFile(App.manualModsFile.child(item.Name).child("mod.json").NativePath))
+		        
 		      End
 		    Next
 		  End
 		  
 		  // Populate
 		  For Each modKey As String In App.modLocationMap.Keys
+		    pathString= modkey.Split("/")
 		    tempDict= App.modLocationMap.Value(modKey)
 		    If(tempDict.HasKey("displayName") And tempDict.HasKey("defaultLoadOrder")) Then
-		      modName= tempDict.Lookup("displayName","ERR")
+		      modName= pathString(pathString.LastIndex-1) //tempDict.Lookup("displayName","ERR")
 		      modOrder= tempDict.Lookup("defaultLoadOrder","ERR")
 		      
 		      If(App.steamUser) Then

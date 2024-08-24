@@ -209,7 +209,7 @@ End
 		  Self.selectedRow= MainScreen.lsb_ModOrderList.SelectedRowIndex
 		  
 		  
-		  System.DebugLog(targetName + "|" + targetCurrentOrder + "|" + targetCurrentDependancy)
+		  // System.DebugLog(targetName + "|" + targetCurrentOrder + "|" + targetCurrentDependancy)
 		  
 		  For Each row As DesktopListBoxRow In MainScreen.lsb_ModOrderList.Rows
 		    If(row.Selected) Then

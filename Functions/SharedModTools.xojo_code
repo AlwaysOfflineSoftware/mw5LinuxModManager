@@ -12,6 +12,9 @@ Protected Module SharedModTools
 
 	#tag Method, Flags = &h0
 		Sub populateLoadouts()
+		  MainScreen.pop_SavedLoadouts.RemoveAllRows
+		  MainScreen.pop_SavedLoadouts.AddRow("<new>")
+		  
 		  For Each item As FolderItem In App.savedConfigs.Children
 		    If(item.DisplayName="settings.ini") Then
 		      Continue
