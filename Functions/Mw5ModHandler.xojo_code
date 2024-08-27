@@ -13,8 +13,13 @@ Protected Module Mw5ModHandler
 		  
 		  For row As Integer= 0 To MainScreen.lsb_ModOrderList.RowCount-1
 		    If(MainScreen.lsb_ModOrderList.CellTextAt(row,0)="Y") Then
-		      enabledModContent.Value(MainScreen.lsb_ModOrderList.CellTextAt(row,2).ReplaceAll(" ", "").Trim)= _
-		      enabledDefaultContent
+		      If(MainScreen.lsb_ModOrderList.CellTextAt(row,4)="Y") Then
+		        enabledModContent.Value(MainScreen.lsb_ModOrderList.CellTextAt(row,1).ReplaceAll(" ", "").Trim)= _
+		        enabledDefaultContent
+		      Else
+		        enabledModContent.Value(MainScreen.lsb_ModOrderList.CellTextAt(row,2).ReplaceAll(" ", "").Trim)= _
+		        enabledDefaultContent
+		      End
 		    End
 		  Next 
 		  
@@ -92,7 +97,11 @@ Protected Module Mw5ModHandler
 		    Var name As String
 		    
 		    For row As Integer=0 To MainScreen.lsb_ModOrderList.RowCount-1
-		      name= MainScreen.lsb_ModOrderList.CellTextAt(row,2).ReplaceAll(" ", "").Trim
+		      If(MainScreen.lsb_ModOrderList.CellTextAt(row,4)="Y") Then
+		        name= MainScreen.lsb_ModOrderList.CellTextAt(row,1).ReplaceAll(" ", "").Trim
+		      Else
+		        name= MainScreen.lsb_ModOrderList.CellTextAt(row,2).ReplaceAll(" ", "").Trim
+		      End
 		      If(enabledFileContents.Contains(name)) Then
 		        MainScreen.lsb_ModOrderList.CellTextAt(row,0)="Y"
 		        // System.DebugLog(name + " TRUE")
@@ -197,7 +206,8 @@ Protected Module Mw5ModHandler
 		      
 		      If(App.steamUser) Then
 		        If(modKey.Contains(App.steamModsFile.NativePath)) Then
-		          MainScreen.lsb_ModOrderList.AddRow("",modID.ToString,_
+		          modName= tempDict.Lookup("displayName","ERR")
+		          MainScreen.lsb_ModOrderList.AddRow("",pathString(pathString.LastIndex-1),_
 		          modName.Replace(",","").Trim,_
 		          modOrder.ReplaceAll(",","").ReplaceAll(".0","").Trim,"Y")
 		          App.modIDMap.Value(modID)=modName.Replace(",","").Trim
