@@ -195,16 +195,16 @@ End
 	#tag Event
 		Sub Opening()
 		  Self.targetName= MainScreen.lsb_ModOrderList.CellTextAt(_
-		  MainScreen.lsb_ModOrderList.SelectedRowIndex, 2)
+		  MainScreen.lsb_ModOrderList.SelectedRowIndex, App.COL_NAME)
 		  
 		  Self.targetCurrentOrder=MainScreen.lsb_ModOrderList.CellTextAt(_
-		  MainScreen.lsb_ModOrderList.SelectedRowIndex, 3)
+		  MainScreen.lsb_ModOrderList.SelectedRowIndex, App.COL_ORDER)
 		  
 		  Self.targetCurrentDependancy=MainScreen.lsb_ModOrderList.CellTextAt(_
-		  MainScreen.lsb_ModOrderList.SelectedRowIndex, 4)
+		  MainScreen.lsb_ModOrderList.SelectedRowIndex, App.COL_STEAM)
 		  
 		  Self.selectedID= MainScreen.lsb_ModOrderList.CellTextAt(_
-		  MainScreen.lsb_ModOrderList.SelectedRowIndex, 1)
+		  MainScreen.lsb_ModOrderList.SelectedRowIndex, App.COL_ID)
 		  
 		  Self.selectedRow= MainScreen.lsb_ModOrderList.SelectedRowIndex
 		  
@@ -260,16 +260,10 @@ End
 		  
 		  Var canChangeLoadOrder As Boolean= False
 		  
-		  Var col_enabled As Integer= 0
-		  Var col_id As Integer= 1
-		  Var col_name As Integer= 2
-		  Var col_order As Integer= 3
-		  Var col_steam As Integer= 4
-		  
 		  // Order Number
 		  For i As Integer= 0 To lsb_ref.RowCount-1 
-		    lsb_ref.CellTextAt(selectedRow,col_order)= targetCurrentOrder
-		    If(lsb_ref.CellTextAt(i,col_steam)="Y") Then
+		    lsb_ref.CellTextAt(selectedRow,App.COL_ORDER)= targetCurrentOrder
+		    If(lsb_ref.CellTextAt(i,App.COL_STEAM)="Y") Then
 		      Mw5ModHandler.UpdateModDictionary(targetName,targetCurrentOrder,True)
 		    Else
 		      Mw5ModHandler.UpdateModDictionary(targetName,targetCurrentOrder,False)

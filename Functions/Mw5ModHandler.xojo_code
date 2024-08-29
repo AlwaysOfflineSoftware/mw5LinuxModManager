@@ -12,13 +12,13 @@ Protected Module Mw5ModHandler
 		  enabledFileContent.Value("gameVersion")= "1.1.361"
 		  
 		  For row As Integer= 0 To MainScreen.lsb_ModOrderList.RowCount-1
-		    If(MainScreen.lsb_ModOrderList.CellTextAt(row,0)="Y") Then
-		      If(MainScreen.lsb_ModOrderList.CellTextAt(row,4)="Y") Then
-		        enabledModContent.Value(MainScreen.lsb_ModOrderList.CellTextAt(row,1).ReplaceAll(" ", "").Trim)= _
-		        enabledDefaultContent
+		    If(MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_ENABLED)="Y") Then
+		      If(MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_STEAM)="Y") Then
+		        enabledModContent.Value(MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_ID)._
+		        ReplaceAll(" ", "").Trim)= enabledDefaultContent
 		      Else
-		        enabledModContent.Value(MainScreen.lsb_ModOrderList.CellTextAt(row,2).ReplaceAll(" ", "").Trim)= _
-		        enabledDefaultContent
+		        enabledModContent.Value(MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_NAME)._
+		        ReplaceAll(" ", "").Trim)= enabledDefaultContent
 		      End
 		    End
 		  Next 
@@ -97,16 +97,16 @@ Protected Module Mw5ModHandler
 		    Var name As String
 		    
 		    For row As Integer=0 To MainScreen.lsb_ModOrderList.RowCount-1
-		      If(MainScreen.lsb_ModOrderList.CellTextAt(row,4)="Y") Then
-		        name= MainScreen.lsb_ModOrderList.CellTextAt(row,1).ReplaceAll(" ", "").Trim
+		      If(MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_STEAM)="Y") Then
+		        name= MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_ID).ReplaceAll(" ", "").Trim
 		      Else
-		        name= MainScreen.lsb_ModOrderList.CellTextAt(row,2).ReplaceAll(" ", "").Trim
+		        name= MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_NAME).ReplaceAll(" ", "").Trim
 		      End
 		      If(enabledFileContents.Contains(name)) Then
-		        MainScreen.lsb_ModOrderList.CellTextAt(row,0)="Y"
+		        MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_ENABLED)="Y"
 		        // System.DebugLog(name + " TRUE")
 		      Else
-		        MainScreen.lsb_ModOrderList.CellTextAt(row,0)=" "
+		        MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_ENABLED)=" "
 		        // System.DebugLog(name + " FALSE")
 		      End
 		      
@@ -154,7 +154,7 @@ Protected Module Mw5ModHandler
 		  Next
 		  
 		  CheckEnabled
-		  MainScreen.lsb_ModOrderList.SortingColumn=3
+		  MainScreen.lsb_ModOrderList.SortingColumn=App.COL_ORDER
 		  MainScreen.lsb_ModOrderList.Sort
 		End Sub
 	#tag EndMethod
@@ -235,7 +235,7 @@ Protected Module Mw5ModHandler
 		  Next
 		  
 		  CheckEnabled
-		  MainScreen.lsb_ModOrderList.SortingColumn=3
+		  MainScreen.lsb_ModOrderList.SortingColumn=App.COL_ORDER
 		  MainScreen.lsb_ModOrderList.Sort
 		  
 		  

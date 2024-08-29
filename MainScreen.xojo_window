@@ -414,11 +414,11 @@ End
 		Sub Opening()
 		  Var lsbWidth As Integer= Self.lsb_ModOrderList.Width
 		  
-		  Self.lsb_ModOrderList.ColumnAttributesAt(0).WidthActual=(lsbWidth*0.10)
-		  Self.lsb_ModOrderList.ColumnAttributesAt(1).WidthActual=(lsbWidth*0.10)
-		  Self.lsb_ModOrderList.ColumnAttributesAt(2).WidthActual=(lsbWidth*0.50)
-		  Self.lsb_ModOrderList.ColumnAttributesAt(3).WidthActual=(lsbWidth*0.15)
-		  Self.lsb_ModOrderList.ColumnAttributesAt(4).WidthActual=(lsbWidth*0.15)
+		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_ENABLED).WidthActual=(lsbWidth*0.10)
+		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_ID).WidthActual=(lsbWidth*0.10)
+		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_NAME).WidthActual=(lsbWidth*0.50)
+		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_ORDER).WidthActual=(lsbWidth*0.15)
+		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_STEAM).WidthActual=(lsbWidth*0.15)
 		  
 		  Mw5ModHandler.BackupOriginal
 		  Mw5ModHandler.ReloadMods
@@ -478,30 +478,30 @@ End
 	#tag Event
 		Function DragReorderRows(newPosition as Integer, parentRow as Integer) As Boolean
 		  If(newPosition=0) Then
-		    Me.CellTextAt(Me.SelectedRowIndex,3)= "0"
-		    If(Me.CellTextAt(Me.SelectedRowIndex,5)="Y") Then
-		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,2),"0",True)
+		    Me.CellTextAt(Me.SelectedRowIndex,App.COL_ORDER)= "0"
+		    If(Me.CellTextAt(Me.SelectedRowIndex,App.COL_STEAM)="Y") Then
+		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME),"0",True)
 		    Else
-		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,2),"0",False)
+		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME),"0",False)
 		    End
 		  Else
-		    Me.CellTextAt(Me.SelectedRowIndex,3)= Me.CellTextAt(newPosition,3)
-		    If(Me.CellTextAt(Me.SelectedRowIndex,5)="Y") Then
-		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,2),_
-		      Me.CellTextAt(newPosition,3),True)
+		    Me.CellTextAt(Me.SelectedRowIndex,App.COL_ORDER)= Me.CellTextAt(newPosition,App.COL_ORDER)
+		    If(Me.CellTextAt(Me.SelectedRowIndex,App.COL_STEAM)="Y") Then
+		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME),_
+		      Me.CellTextAt(newPosition,App.COL_ORDER),True)
 		    Else
-		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,2),_
-		      Me.CellTextAt(newPosition,3),False)
+		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME),_
+		      Me.CellTextAt(newPosition,App.COL_ORDER),False)
 		    End
 		  End 
 		End Function
 	#tag EndEvent
 	#tag Event
 		Sub DoublePressed()
-		  If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y") Then
-		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)=" "
+		  If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)="Y") Then
+		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)=" "
 		  Else
-		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y"
+		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)="Y"
 		  End
 		End Sub
 	#tag EndEvent
@@ -530,7 +530,7 @@ End
 		Function RowComparison(row1 as Integer, row2 as Integer, column as Integer, ByRef result as Integer) As Boolean
 		  Select Case column
 		    
-		  Case 1 ' This is our numerical value column. Let's do the work ourselves
+		  Case App.COL_ID ' This is our numerical value column. Let's do the work ourselves
 		    If Me.CellTextAt(row1, column ).Val < Me.CellTextAt(row2, column).Val Then
 		      result = -1
 		    ElseIf Me.CellTextAt(row1, column).Val > Me.CellTextAt(row2, column).Val Then
@@ -541,7 +541,7 @@ End
 		    Return True
 		    
 		    
-		  Case 3 ' This is our numerical value column. Let's do the work ourselves
+		  Case App.COL_ORDER ' This is our numerical value column. Let's do the work ourselves
 		    If Me.CellTextAt(row1, column ).Val < Me.CellTextAt(row2, column).Val Then
 		      result = -1
 		    ElseIf Me.CellTextAt(row1, column).Val > Me.CellTextAt(row2, column).Val Then
@@ -645,10 +645,10 @@ End
 #tag Events btn_Toggle
 	#tag Event
 		Sub Pressed()
-		  If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y") Then
-		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)=" "
+		  If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)="Y") Then
+		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)=" "
 		  Else
-		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y"
+		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)="Y"
 		  End
 		End Sub
 	#tag EndEvent
