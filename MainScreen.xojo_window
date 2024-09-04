@@ -49,7 +49,7 @@ Begin DesktopWindow MainScreen
       HeadingIndex    =   -1
       Height          =   322
       Index           =   -2147483648
-      InitialValue    =   "Enabled	ID	Mod Name	Load Order	Steam DL"
+      InitialValue    =   "Enabled	ID	Mod Name	Load Order	Steam"
       Italic          =   False
       Left            =   125
       LockBottom      =   True
@@ -406,6 +406,37 @@ Begin DesktopWindow MainScreen
       Visible         =   True
       Width           =   80
    End
+   Begin DesktopButton btn_Edit
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Edit"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   26
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   17
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   "Modify load order and dependancies"
+      Top             =   186
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
 End
 #tag EndDesktopWindow
 
@@ -415,10 +446,10 @@ End
 		  Var lsbWidth As Integer= Self.lsb_ModOrderList.Width
 		  
 		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_ENABLED).WidthActual=(lsbWidth*0.10)
-		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_ID).WidthActual=(lsbWidth*0.10)
+		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_ID).WidthActual=(lsbWidth*0.15)
 		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_NAME).WidthActual=(lsbWidth*0.50)
 		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_ORDER).WidthActual=(lsbWidth*0.15)
-		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_STEAM).WidthActual=(lsbWidth*0.15)
+		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_STEAM).WidthActual=(lsbWidth*0.10)
 		  
 		  Mw5ModHandler.BackupOriginal
 		  Mw5ModHandler.ReloadMods
@@ -498,10 +529,18 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub DoublePressed()
-		  If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)="Y") Then
-		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)=" "
-		  Else
-		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)="Y"
+		  
+		  If(Self.lsb_ModOrderList.SelectedRowIndex<>-1) Then
+		    If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,_
+		      App.COL_ENABLED)="Y") Then
+		      
+		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,_
+		      App.COL_ENABLED)=" "
+		      
+		    Else
+		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,_
+		      App.COL_ENABLED)="Y"
+		    End
 		  End
 		End Sub
 	#tag EndEvent
@@ -530,18 +569,7 @@ End
 		Function RowComparison(row1 as Integer, row2 as Integer, column as Integer, ByRef result as Integer) As Boolean
 		  Select Case column
 		    
-		  Case App.COL_ID ' This is our numerical value column. Let's do the work ourselves
-		    If Me.CellTextAt(row1, column ).Val < Me.CellTextAt(row2, column).Val Then
-		      result = -1
-		    ElseIf Me.CellTextAt(row1, column).Val > Me.CellTextAt(row2, column).Val Then
-		      result = 1
-		    Else
-		      result = 0
-		    End If
-		    Return True
-		    
-		    
-		  Case App.COL_ORDER ' This is our numerical value column. Let's do the work ourselves
+		  Case App.COL_ORDER ' This is our numerical value column. 
 		    If Me.CellTextAt(row1, column ).Val < Me.CellTextAt(row2, column).Val Then
 		      result = -1
 		    ElseIf Me.CellTextAt(row1, column).Val > Me.CellTextAt(row2, column).Val Then
@@ -645,11 +673,26 @@ End
 #tag Events btn_Toggle
 	#tag Event
 		Sub Pressed()
-		  If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)="Y") Then
-		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)=" "
-		  Else
-		    Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)="Y"
+		  
+		  If(Self.lsb_ModOrderList.SelectedRowIndex<>-1) Then
+		    If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)="Y") Then
+		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)=" "
+		    Else
+		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)="Y"
+		    End
 		  End
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_Edit
+	#tag Event
+		Sub Pressed()
+		  
+		  If(Self.lsb_ModOrderList.SelectedRowIndex<>-1) Then
+		    If(Self.lsb_ModOrderList.SelectedRowIndex<>-1) Then
+		      OrderInputScreen.show
+		    End
+		  end
 		End Sub
 	#tag EndEvent
 #tag EndEvents

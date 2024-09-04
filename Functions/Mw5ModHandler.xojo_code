@@ -97,16 +97,12 @@ Protected Module Mw5ModHandler
 		    Var name As String
 		    
 		    For row As Integer=0 To MainScreen.lsb_ModOrderList.RowCount-1
-		      If(MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_STEAM)="Y") Then
-		        name= MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_ID).ReplaceAll(" ", "").Trim
-		      Else
-		        name= MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_NAME).ReplaceAll(" ", "").Trim
-		      End
+		      name= MainScreen.lsb_ModOrderList.CellTextAt(row,2).ReplaceAll(" ", "").Trim
 		      If(enabledFileContents.Contains(name)) Then
-		        MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_ENABLED)="Y"
+		        MainScreen.lsb_ModOrderList.CellTextAt(row,0)="Y"
 		        // System.DebugLog(name + " TRUE")
 		      Else
-		        MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_ENABLED)=" "
+		        MainScreen.lsb_ModOrderList.CellTextAt(row,0)=" "
 		        // System.DebugLog(name + " FALSE")
 		      End
 		      
@@ -154,7 +150,7 @@ Protected Module Mw5ModHandler
 		  Next
 		  
 		  CheckEnabled
-		  MainScreen.lsb_ModOrderList.SortingColumn=App.COL_ORDER
+		  MainScreen.lsb_ModOrderList.SortingColumn=3
 		  MainScreen.lsb_ModOrderList.Sort
 		End Sub
 	#tag EndMethod
@@ -163,7 +159,7 @@ Protected Module Mw5ModHandler
 		Sub ReloadMods()
 		  Var modName As String
 		  Var modOrder As String
-		  Var modID As Integer
+		  Var modID As String
 		  Var steamMod As Boolean= False
 		  Var tempDict As Dictionary 
 		  Var pathString() As String
@@ -203,39 +199,39 @@ Protected Module Mw5ModHandler
 		    If(tempDict.HasKey("displayName") And tempDict.HasKey("defaultLoadOrder")) Then
 		      modName= pathString(pathString.LastIndex-1) //tempDict.Lookup("displayName","ERR")
 		      modOrder= tempDict.Lookup("defaultLoadOrder","ERR")
+		      modID= modName.Left(2).Lowercase + modName.Right(2).Lowercase +_
+		       modName.Length.ToString
 		      
 		      If(App.steamUser) Then
 		        If(modKey.Contains(App.steamModsFile.NativePath)) Then
+		          modID= pathString(pathString.LastIndex-1)
 		          modName= tempDict.Lookup("displayName","ERR")
-		          MainScreen.lsb_ModOrderList.AddRow("",pathString(pathString.LastIndex-1),_
+		          MainScreen.lsb_ModOrderList.AddRow("",modID,_
 		          modName.Replace(",","").Trim,_
-		          modOrder.ReplaceAll(",","").ReplaceAll(".0","").Trim,"Y")
+		          modOrder.ReplaceAll(",","").ReplaceAll(".0","").Trim," ","Y")
 		          App.modIDMap.Value(modID)=modName.Replace(",","").Trim
-		          modID= modID+1
 		        Else
-		          MainScreen.lsb_ModOrderList.AddRow("",modID.ToString,_
+		          MainScreen.lsb_ModOrderList.AddRow("",modID,_
 		          modName.Replace(",","").Trim,_
-		          modOrder.ReplaceAll(",","").ReplaceAll(".0","").Trim," ")
+		          modOrder.ReplaceAll(",","").ReplaceAll(".0","").Trim," "," ")
 		          App.modIDMap.Value(modID)=modName.Replace(",","").Trim
-		          modID= modID+1
 		        End
 		      Else
-		        MainScreen.lsb_ModOrderList.AddRow("",modID.ToString,_
+		        MainScreen.lsb_ModOrderList.AddRow("",modID,_
 		        modName.Replace(",","").Trim,_
 		        modOrder.ReplaceAll(",","").ReplaceAll(".0","").Trim," ")
 		        App.modIDMap.Value(modID)=modName.Replace(",","").Trim
-		        modID= modID+1
 		      End
 		      
 		    Else
+		      modID= "?"
 		      MainScreen.lsb_ModOrderList.AddRow("???","???",_
 		      "???","???","???","Y")
-		      modID= modID+1
 		    End
 		  Next
 		  
 		  CheckEnabled
-		  MainScreen.lsb_ModOrderList.SortingColumn=App.COL_ORDER
+		  MainScreen.lsb_ModOrderList.SortingColumn=3
 		  MainScreen.lsb_ModOrderList.Sort
 		  
 		  

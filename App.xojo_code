@@ -83,6 +83,9 @@ Inherits DesktopApplication
 	#tag EndProperty
 
 
+	#tag Constant, Name = COL_DEPENDS, Type = Double, Dynamic = False, Default = \"99", Scope = Public
+	#tag EndConstant
+
 	#tag Constant, Name = COL_ENABLED, Type = Double, Dynamic = False, Default = \"0", Scope = Public
 	#tag EndConstant
 

@@ -201,23 +201,22 @@ End
 		  MainScreen.lsb_ModOrderList.SelectedRowIndex, App.COL_ORDER)
 		  
 		  Self.targetCurrentDependancy=MainScreen.lsb_ModOrderList.CellTextAt(_
-		  MainScreen.lsb_ModOrderList.SelectedRowIndex, App.COL_STEAM)
+		  MainScreen.lsb_ModOrderList.SelectedRowIndex, App.COL_DEPENDS)
 		  
 		  Self.selectedID= MainScreen.lsb_ModOrderList.CellTextAt(_
 		  MainScreen.lsb_ModOrderList.SelectedRowIndex, App.COL_ID)
 		  
 		  Self.selectedRow= MainScreen.lsb_ModOrderList.SelectedRowIndex
 		  
-		  
 		  // System.DebugLog(targetName + "|" + targetCurrentOrder + "|" + targetCurrentDependancy)
 		  
-		  For Each row As DesktopListBoxRow In MainScreen.lsb_ModOrderList.Rows
-		    If(row.Selected) Then
-		      Continue
-		    End
-		  Next
+		  If(MainScreen.lsb_ModOrderList.CellTextAt _
+		    (MainScreen.lsb_ModOrderList.SelectedRowIndex,App.COL_STEAM)="Y") Then
+		    Self.txt_ModNameLocked.Text= targetName + " (S)"
+		  Else
+		    Self.txt_ModNameLocked.Text= targetName
+		  End
 		  
-		  Self.txt_ModNameLocked.Text= targetName
 		  Self.pop_OrderNumber.SelectedRowIndex= targetCurrentOrder.ToInteger
 		  
 		End Sub
