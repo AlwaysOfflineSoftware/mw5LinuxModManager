@@ -294,7 +294,7 @@ Begin DesktopWindow AboutScreen
       TabIndex        =   11
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "AlwaysOfflineSoftware.com"
+      Text            =   "Our Patreon"
       TextAlignment   =   0
       TextColor       =   &c00A0FF00
       Tooltip         =   ""
@@ -339,7 +339,7 @@ End
 #tag Events lbl_website
 	#tag Event
 		Function MouseDown(x As Integer, y As Integer) As Boolean
-		  System.GotoURL("https://alwaysofflinesoftware.com")
+		  System.GotoURL("https://www.patreon.com/AlwaysOfflineSoftware")
 		  return true
 		End Function
 	#tag EndEvent
