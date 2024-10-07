@@ -70,21 +70,27 @@ Protected Module Mw5ModHandler
 		  End
 		  
 		  // Manual Mods
-		  If(App.manualModsFile.Exists) Then
-		    For Each item As FolderItem In App.manualModsFile.Children
+		  If(App.manualModsFolder.Exists) Then
+		    For Each item As FolderItem In App.manualModsFolder.Children
 		      If(item.DisplayName.Contains(".")) Then
 		        Continue
 		      Else
-		        If(App.manualModsFile.child(item.Name).child("mod.json.bak").Exists) Then
+		        If(App.manualModsFolder.child(item.Name).child("mod.json.bak").Exists) Then
 		          Continue
 		        Else
-		          App.manualModsFile.child(item.Name).child("mod.json")._
-		          CopyTo(App.manualModsFile.child(item.Name).child("mod.json.bak"))
+		          App.manualModsFolder.child(item.Name).child("mod.json")._
+		          CopyTo(App.manualModsFolder.child(item.Name).child("mod.json.bak"))
 		        End
 		      End
 		    Next
 		  End
 		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub CheckDependancies()
 		  
 		End Sub
 	#tag EndMethod
@@ -108,6 +114,12 @@ Protected Module Mw5ModHandler
 		      
 		    Next
 		  End
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub LoadDependancies()
+		  
 		End Sub
 	#tag EndMethod
 
@@ -180,13 +192,13 @@ Protected Module Mw5ModHandler
 		  End
 		  
 		  // Manual Mods
-		  If(App.manualModsFile.Exists) Then
-		    For Each item As FolderItem In App.manualModsFile.Children
+		  If(App.manualModsFolder.Exists) Then
+		    For Each item As FolderItem In App.manualModsFolder.Children
 		      If(item.DisplayName.Contains(".")) Then
 		        Continue
 		      Else
-		        App.modLocationMap.Value(App.manualModsFile.child(item.Name).child("mod.json").NativePath)=_
-		        ParseJSON(Utils.ReadFile(App.manualModsFile.child(item.Name).child("mod.json").NativePath))
+		        App.modLocationMap.Value(App.manualModsFolder.child(item.Name).child("mod.json").NativePath)=_
+		        ParseJSON(Utils.ReadFile(App.manualModsFolder.child(item.Name).child("mod.json").NativePath))
 		        
 		      End
 		    Next
@@ -257,18 +269,24 @@ Protected Module Mw5ModHandler
 		  End
 		  
 		  // Manual Mods
-		  For Each item As FolderItem In App.manualModsFile.Children
+		  For Each item As FolderItem In App.manualModsFolder.Children
 		    If(item.DisplayName.Contains(".")) Then
 		      Continue
 		    Else
-		      If(App.manualModsFile.child(item.Name).child("mod.json.bak").Exists) Then
-		        App.manualModsFile.child(item.Name).child("mod.json").remove
+		      If(App.manualModsFolder.child(item.Name).child("mod.json.bak").Exists) Then
+		        App.manualModsFolder.child(item.Name).child("mod.json").remove
 		        
-		        App.manualModsFile.child(item.Name).child("mod.json.bak")_
-		        .CopyTo(App.manualModsFile.child(item.Name).child("mod.json"))
+		        App.manualModsFolder.child(item.Name).child("mod.json.bak")_
+		        .CopyTo(App.manualModsFolder.child(item.Name).child("mod.json"))
 		      End
 		    End
 		  Next
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SaveDependancies()
 		  
 		End Sub
 	#tag EndMethod

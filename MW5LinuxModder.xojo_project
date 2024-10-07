@@ -1,7 +1,7 @@
 Type=Desktop
-RBProjectVersion=2024.021
+RBProjectVersion=2024.03
 MinIDEVersion=20210300
-OrigIDEVersion=20240201
+OrigIDEVersion=20240300
 Class=App;App.xojo_code;&h000000001B8357FF;&h0000000000000000;false
 MenuBar=MainMenuBar;MainMenuBar.xojo_menu;&h0000000051D00FFF;&h0000000000000000;false
 DesktopWindow=OpeningScreen;OpeningScreen.xojo_window;&h000000000C9767FF;&h0000000000000000;false
@@ -20,6 +20,7 @@ Module=SharedModTools;Functions/SharedModTools.xojo_code;&h00000000043C6FFF;&h00
 Module=Utils;Functions/Utils.xojo_code;&h000000007CF497FF;&h000000004F2F87FF;false
 MultiImage=img_XojoLogo;Assets/img_XojoLogo.xojo_image;&h000000005BA5FFFF;&h0000000017ACCFFF;false
 MultiImage=img_MechLogoMini;Assets/img_MechLogoMini.xojo_image;&h00000000093D7FFF;&h0000000017ACCFFF;false
+RawData=zzs;../../DesktopApps/mw5linuxModder/Assets/7zzs;&h000000006BBDA7FF;&h0000000017ACCFFF;false
 DefaultWindow=OpeningScreen
 AppMenuBar=MainMenuBar
 MajorVersion=0

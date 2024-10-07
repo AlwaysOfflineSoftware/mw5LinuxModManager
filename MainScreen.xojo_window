@@ -33,7 +33,7 @@ Begin DesktopWindow MainScreen
       AllowRowDragging=   True
       AllowRowReordering=   True
       Bold            =   False
-      ColumnCount     =   5
+      ColumnCount     =   6
       ColumnWidths    =   ""
       DefaultRowHeight=   -1
       DropIndicatorVisible=   False
@@ -49,7 +49,7 @@ Begin DesktopWindow MainScreen
       HeadingIndex    =   -1
       Height          =   322
       Index           =   -2147483648
-      InitialValue    =   "Enabled	ID	Mod Name	Load Order	Steam"
+      InitialValue    =   "Enabled	ID	Mod Name	Load Order	Depends	Steam"
       Italic          =   False
       Left            =   125
       LockBottom      =   True
@@ -437,6 +437,37 @@ Begin DesktopWindow MainScreen
       Visible         =   True
       Width           =   80
    End
+   Begin DesktopButton btn_Install
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Install"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   26
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   18
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   96
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
 End
 #tag EndDesktopWindow
 
@@ -446,9 +477,10 @@ End
 		  Var lsbWidth As Integer= Self.lsb_ModOrderList.Width
 		  
 		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_ENABLED).WidthActual=(lsbWidth*0.10)
-		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_ID).WidthActual=(lsbWidth*0.15)
-		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_NAME).WidthActual=(lsbWidth*0.50)
+		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_ID).WidthActual=(lsbWidth*0.10)
+		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_NAME).WidthActual=(lsbWidth*0.40)
 		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_ORDER).WidthActual=(lsbWidth*0.15)
+		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_DEPENDS).WidthActual=(lsbWidth*0.15)
 		  Self.lsb_ModOrderList.ColumnAttributesAt(App.COL_STEAM).WidthActual=(lsbWidth*0.10)
 		  
 		  Mw5ModHandler.BackupOriginal
@@ -509,20 +541,20 @@ End
 	#tag Event
 		Function DragReorderRows(newPosition as Integer, parentRow as Integer) As Boolean
 		  If(newPosition=0) Then
-		    Me.CellTextAt(Me.SelectedRowIndex,App.COL_ORDER)= "0"
-		    If(Me.CellTextAt(Me.SelectedRowIndex,App.COL_STEAM)="Y") Then
-		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME),"0",True)
+		    Me.CellTextAt(Me.SelectedRowIndex,3)= "0"
+		    If(Me.CellTextAt(Me.SelectedRowIndex,5)="Y") Then
+		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,2),"0",True)
 		    Else
-		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME),"0",False)
+		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,2),"0",False)
 		    End
 		  Else
-		    Me.CellTextAt(Me.SelectedRowIndex,App.COL_ORDER)= Me.CellTextAt(newPosition,App.COL_ORDER)
-		    If(Me.CellTextAt(Me.SelectedRowIndex,App.COL_STEAM)="Y") Then
-		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME),_
-		      Me.CellTextAt(newPosition,App.COL_ORDER),True)
+		    Me.CellTextAt(Me.SelectedRowIndex,3)= Me.CellTextAt(newPosition,3)
+		    If(Me.CellTextAt(Me.SelectedRowIndex,5)="Y") Then
+		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,2),_
+		      Me.CellTextAt(newPosition,3),True)
 		    Else
-		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME),_
-		      Me.CellTextAt(newPosition,App.COL_ORDER),False)
+		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,2),_
+		      Me.CellTextAt(newPosition,3),False)
 		    End
 		  End 
 		End Function
@@ -531,17 +563,12 @@ End
 		Sub DoublePressed()
 		  
 		  If(Self.lsb_ModOrderList.SelectedRowIndex<>-1) Then
-		    If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,_
-		      App.COL_ENABLED)="Y") Then
-		      
-		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,_
-		      App.COL_ENABLED)=" "
-		      
+		    If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y") Then
+		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)=" "
 		    Else
-		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,_
-		      App.COL_ENABLED)="Y"
+		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y"
 		    End
-		  End
+		  end
 		End Sub
 	#tag EndEvent
 	#tag Event
@@ -550,8 +577,10 @@ End
 		    Return True
 		  Else
 		    base.AddMenu(New MenuItem("Edit"))
+		    If(Me.CellTextAt(Me.SelectedRowIndex,App.COL_STEAM)<>"Y") Then
+		      base.AddMenu(New MenuItem("Uninstall"))
+		    End
 		  End
-		  
 		  
 		End Function
 	#tag EndEvent
@@ -560,6 +589,16 @@ End
 		  Select Case selectedItem.Text
 		  Case "Edit"
 		    OrderInputScreen.show
+		  Case "Uninstall"
+		    Var modSelected As String= Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME)
+		    Var uninstalled As Boolean= SharedModTools.RemoveMod(modSelected)
+		    
+		    If(uninstalled) Then
+		      Utils.ErrorHandler(1, modSelected + " was uninstalled!","") 
+		    Else
+		      Utils.ErrorHandler(1, "Uninstall Failed","Please check the selected mod,"_
+		      + "refresh the load order and try again") 
+		    End
 		  End Select
 		  
 		  Return True
@@ -569,7 +608,7 @@ End
 		Function RowComparison(row1 as Integer, row2 as Integer, column as Integer, ByRef result as Integer) As Boolean
 		  Select Case column
 		    
-		  Case App.COL_ORDER ' This is our numerical value column. 
+		  Case 3 ' This is our numerical value column. Let's do the work ourselves
 		    If Me.CellTextAt(row1, column ).Val < Me.CellTextAt(row2, column).Val Then
 		      result = -1
 		    ElseIf Me.CellTextAt(row1, column).Val > Me.CellTextAt(row2, column).Val Then
@@ -675,12 +714,12 @@ End
 		Sub Pressed()
 		  
 		  If(Self.lsb_ModOrderList.SelectedRowIndex<>-1) Then
-		    If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)="Y") Then
-		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)=" "
+		    If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y") Then
+		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)=" "
 		    Else
-		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,App.COL_ENABLED)="Y"
+		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y"
 		    End
-		  End
+		  end
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -693,6 +732,26 @@ End
 		      OrderInputScreen.show
 		    End
 		  end
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_Install
+	#tag Event
+		Sub Pressed()
+		  Var modArchive As FolderItem= Utils.SelectTargetDialog("home",False)
+		  Var installed As Boolean
+		  
+		  If(modArchive<>Nil And modArchive.Exists) Then
+		    installed= SharedModTools.InstallMod(modArchive)
+		    If(installed) Then
+		      Utils.ErrorHandler(1, modArchive.Name + " was installed!","") 
+		    Else
+		      Utils.ErrorHandler(1, "install Failed","Please check the selected mod,"_
+		      + "to make sure it is a supported format and is not corrupt") 
+		    End
+		  End
+		  
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents

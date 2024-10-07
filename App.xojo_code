@@ -10,10 +10,10 @@ Inherits DesktopApplication
 		    BaseDir= SpecialFolder.UserHome.child(".steam").Child("steam")_
 		    .Child("steamapps")
 		    
-		    manualModsFile= BaseDir.Child("common").Child("MechWarrior 5 Mercenaries")_
+		    manualModsFolder= BaseDir.Child("common").Child("MechWarrior 5 Mercenaries")_
 		    .Child("MW5Mercs").Child("Mods")
 		    
-		    enabledModsFile= manualModsFile.child("modlist.json")
+		    enabledModsFile= manualModsFolder.child("modlist.json")
 		    
 		    steamModsFile= BaseDir.Child("workshop").Child("content").Child("784080")
 		  End
@@ -51,7 +51,7 @@ Inherits DesktopApplication
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		manualModsFile As Folderitem
+		manualModsFolder As Folderitem
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -83,7 +83,7 @@ Inherits DesktopApplication
 	#tag EndProperty
 
 
-	#tag Constant, Name = COL_DEPENDS, Type = Double, Dynamic = False, Default = \"99", Scope = Public
+	#tag Constant, Name = COL_DEPENDS, Type = Double, Dynamic = False, Default = \"4", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = COL_ENABLED, Type = Double, Dynamic = False, Default = \"0", Scope = Public
@@ -98,7 +98,7 @@ Inherits DesktopApplication
 	#tag Constant, Name = COL_ORDER, Type = Double, Dynamic = False, Default = \"3", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = COL_STEAM, Type = Double, Dynamic = False, Default = \"4", Scope = Public
+	#tag Constant, Name = COL_STEAM, Type = Double, Dynamic = False, Default = \"5", Scope = Public
 	#tag EndConstant
 
 	#tag Constant, Name = kEditClear, Type = String, Dynamic = False, Default = \"&Delete", Scope = Public

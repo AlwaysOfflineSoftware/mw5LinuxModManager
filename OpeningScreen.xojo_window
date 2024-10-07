@@ -396,7 +396,7 @@ End
 		  Var settingsArr() As String= Utils.ReadFile(App.savedSettings.NativePath).Split(EndOfLine)
 		  
 		  If(settingsArr(0)="") Then
-		    txt_NexusModFolder.Text=App.manualModsFile.NativePath
+		    txt_NexusModFolder.Text=App.manualModsFolder.NativePath
 		    txt_SteamModsFolder.Text=App.steamModsFile.NativePath
 		  Else
 		    txt_NexusModFolder.Text=settingsArr(0)
@@ -438,8 +438,8 @@ End
 		    Utils.WriteFile(App.savedSettings,Self.txt_NexusModFolder.Text,True)
 		    Utils.WriteFile(App.savedSettings,Self.txt_SteamModsFolder.Text,False)
 		    
-		    App.manualModsFile= New FolderItem(Self.txt_NexusModFolder.Text.Trim)
-		    App.enabledModsFile= App.manualModsFile.Child("modlist.json")
+		    App.manualModsFolder= New FolderItem(Self.txt_NexusModFolder.Text.Trim)
+		    App.enabledModsFile= App.manualModsFolder.Child("modlist.json")
 		    
 		    If(chk_NotSteamUser.Value=False) Then
 		      App.steamModsFile= New FolderItem(Self.txt_SteamModsFolder.Text.Trim)

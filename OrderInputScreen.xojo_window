@@ -10,7 +10,7 @@ Begin DesktopWindow OrderInputScreen
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   107
+   Height          =   145
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
@@ -188,6 +188,70 @@ Begin DesktopWindow OrderInputScreen
       Visible         =   True
       Width           =   202
    End
+   Begin DesktopLabel lbl_DependsOn
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   26
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   2
+      Selectable      =   False
+      TabIndex        =   12
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Depends On:"
+      TextAlignment   =   0
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   99
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   100
+   End
+   Begin DesktopComboBox cmb_DependsOn
+      AllowAutoComplete=   False
+      AllowAutoDeactivate=   True
+      AllowFocusRing  =   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   26
+      Hint            =   "Nothing"
+      Index           =   -2147483648
+      InitialValue    =   ""
+      Italic          =   False
+      Left            =   132
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      SelectedRowIndex=   0
+      TabIndex        =   13
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   "Mod will not be able to have a load order lower than its dependancy"
+      Top             =   97
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   202
+   End
 End
 #tag EndDesktopWindow
 
@@ -195,28 +259,31 @@ End
 	#tag Event
 		Sub Opening()
 		  Self.targetName= MainScreen.lsb_ModOrderList.CellTextAt(_
-		  MainScreen.lsb_ModOrderList.SelectedRowIndex, App.COL_NAME)
+		  MainScreen.lsb_ModOrderList.SelectedRowIndex, 2)
 		  
 		  Self.targetCurrentOrder=MainScreen.lsb_ModOrderList.CellTextAt(_
-		  MainScreen.lsb_ModOrderList.SelectedRowIndex, App.COL_ORDER)
+		  MainScreen.lsb_ModOrderList.SelectedRowIndex, 3)
 		  
 		  Self.targetCurrentDependancy=MainScreen.lsb_ModOrderList.CellTextAt(_
-		  MainScreen.lsb_ModOrderList.SelectedRowIndex, App.COL_DEPENDS)
+		  MainScreen.lsb_ModOrderList.SelectedRowIndex, 4)
 		  
 		  Self.selectedID= MainScreen.lsb_ModOrderList.CellTextAt(_
-		  MainScreen.lsb_ModOrderList.SelectedRowIndex, App.COL_ID)
+		  MainScreen.lsb_ModOrderList.SelectedRowIndex, 1)
 		  
 		  Self.selectedRow= MainScreen.lsb_ModOrderList.SelectedRowIndex
 		  
+		  
 		  // System.DebugLog(targetName + "|" + targetCurrentOrder + "|" + targetCurrentDependancy)
 		  
-		  If(MainScreen.lsb_ModOrderList.CellTextAt _
-		    (MainScreen.lsb_ModOrderList.SelectedRowIndex,App.COL_STEAM)="Y") Then
-		    Self.txt_ModNameLocked.Text= targetName + " (S)"
-		  Else
-		    Self.txt_ModNameLocked.Text= targetName
-		  End
+		  For Each row As DesktopListBoxRow In MainScreen.lsb_ModOrderList.Rows
+		    If(row.Selected) Then
+		      Continue
+		    Else
+		      Self.cmb_DependsOn.AddRow(row.CellTextAt(2))
+		    End
+		  Next
 		  
+		  Self.txt_ModNameLocked.Text= targetName
 		  Self.pop_OrderNumber.SelectedRowIndex= targetCurrentOrder.ToInteger
 		  
 		End Sub
@@ -259,10 +326,16 @@ End
 		  
 		  Var canChangeLoadOrder As Boolean= False
 		  
+		  Var col_enabled As Integer= 0
+		  Var col_id As Integer= 1
+		  Var col_name As Integer= 2
+		  Var col_order As Integer= 3
+		  Var col_steam As Integer= 4
+		  
 		  // Order Number
 		  For i As Integer= 0 To lsb_ref.RowCount-1 
-		    lsb_ref.CellTextAt(selectedRow,App.COL_ORDER)= targetCurrentOrder
-		    If(lsb_ref.CellTextAt(i,App.COL_STEAM)="Y") Then
+		    lsb_ref.CellTextAt(selectedRow,col_order)= targetCurrentOrder
+		    If(lsb_ref.CellTextAt(i,col_steam)="Y") Then
 		      Mw5ModHandler.UpdateModDictionary(targetName,targetCurrentOrder,True)
 		    Else
 		      Mw5ModHandler.UpdateModDictionary(targetName,targetCurrentOrder,False)

@@ -427,7 +427,7 @@ End
 		  Var settingsArr() As String= Utils.ReadFile(App.savedSettings.NativePath).Split(EndOfLine)
 		  
 		  If(settingsArr(0)="") Then
-		    txt_NexusModFolder.Text=App.manualModsFile.NativePath
+		    txt_NexusModFolder.Text=App.manualModsFolder.NativePath
 		    txt_SteamModsFolder.Text=App.steamModsFile.NativePath
 		  Else
 		    txt_NexusModFolder.Text=settingsArr(0)
