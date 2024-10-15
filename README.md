@@ -12,4 +12,4 @@ The MW5 Linux Modder is the first MW5 mod manager made for Linux. Too long has i
 
 ![image](https://github.com/AlwaysOfflineSoftware/mw5ModManager/assets/9456373/0f7cbd24-b304-41ba-adc4-3f078e365455)
 
-Made with <a href="https://www.xojo.com/download/">Xojo</a> (Which is free for Linux!)
+Made with <a href="https://www.xojo.com">Xojo</a> (Which is free for Linux!)
