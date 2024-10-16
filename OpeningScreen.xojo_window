@@ -38,7 +38,7 @@ Begin DesktopWindow OpeningScreen
       Format          =   ""
       HasBorder       =   True
       Height          =   27
-      Hint            =   ""
+      Hint            =   "game/file/path/MechWarrior 5 Mercenaries/MW5Mercs/Mods"
       Index           =   -2147483648
       Italic          =   False
       Left            =   172
@@ -79,7 +79,7 @@ Begin DesktopWindow OpeningScreen
       Format          =   ""
       HasBorder       =   True
       Height          =   27
-      Hint            =   ""
+      Hint            =   "~/.steam/steam/steamapps/workshop/content/784080"
       Index           =   -2147483648
       Italic          =   False
       Left            =   112
