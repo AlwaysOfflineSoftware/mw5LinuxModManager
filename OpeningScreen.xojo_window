@@ -294,37 +294,6 @@ Begin DesktopWindow OpeningScreen
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopButton btn_Defaults
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "Defaults"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "Liberation Sans"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   26
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   636
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   8
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   130
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
    Begin DesktopLabel lbl_status
       AllowAutoDeactivate=   True
       Bold            =   False
@@ -365,10 +334,10 @@ Begin DesktopWindow OpeningScreen
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
-      Height          =   22
+      Height          =   26
       Index           =   -2147483648
       Italic          =   False
-      Left            =   482
+      Left            =   574
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -465,17 +434,6 @@ End
 	#tag Event
 		Sub Pressed()
 		  OpeningScreen.Close
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btn_Defaults
-	#tag Event
-		Sub Pressed()
-		  txt_NexusModFolder.Text=App.BaseDir.Child("common").Child("MechWarrior 5 Mercenaries")_
-		  .Child("MW5Mercs").Child("Mods").NativePath
-		  
-		  txt_SteamModsFolder.Text=App.BaseDir.Child("workshop").Child("content").Child("784080").NativePath
-		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents

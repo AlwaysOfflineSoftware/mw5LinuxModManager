@@ -225,7 +225,7 @@ Begin DesktopWindow OrderInputScreen
       AllowAutoDeactivate=   True
       AllowFocusRing  =   True
       Bold            =   False
-      Enabled         =   True
+      Enabled         =   False
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
@@ -245,7 +245,7 @@ Begin DesktopWindow OrderInputScreen
       TabIndex        =   13
       TabPanelIndex   =   0
       TabStop         =   True
-      Tooltip         =   "Mod will not be able to have a load order lower than its dependancy"
+      Tooltip         =   "Coming Soon!"
       Top             =   97
       Transparent     =   False
       Underline       =   False
@@ -355,6 +355,13 @@ End
 		  targetCurrentOrder=""
 		  OrderInputScreen.close
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events cmb_DependsOn
+	#tag Event
+		Sub SelectionChanged(item As DesktopMenuItem)
+		  // Mod will not be able to have a load order lower than its dependancy
 		End Sub
 	#tag EndEvent
 #tag EndEvents
