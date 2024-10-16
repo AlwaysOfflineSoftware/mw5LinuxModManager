@@ -396,14 +396,16 @@ End
 		  Var settingsArr() As String= Utils.ReadFile(App.savedSettings.NativePath).Split(EndOfLine)
 		  
 		  If(settingsArr(0)="") Then
-		    txt_NexusModFolder.Text=App.manualModsFolder.NativePath
-		    txt_SteamModsFolder.Text=App.steamModsFile.NativePath
+		    txt_NexusModFolder.Text="" 
+		    txt_SteamModsFolder.Text="" 
 		  Else
 		    txt_NexusModFolder.Text=settingsArr(0)
 		    txt_SteamModsFolder.Text=settingsArr(1)
 		  End
 		  
-		  If(SpecialFolder.UserHome.child(".steam").Exists) Then
+		  If(SpecialFolder.UserHome.child(".steam").child("steam").child("steamapps")._
+		    Child("common").Child("MechWarrior 5 Mercenaries").Exists) Then
+		    System.DebugLog("Found MW5!")
 		    MainScreen.show
 		    OpeningScreen.close
 		  End
@@ -434,14 +436,14 @@ End
 #tag Events btn_Next
 	#tag Event
 		Sub Pressed()
-		  If(Self.txt_NexusModFolder.Text.Trim<>"" And Self.txt_SteamModsFolder.Text.Trim<>"") Then
+		  If(Self.txt_NexusModFolder.Text.Trim<>"") Then
 		    Utils.WriteFile(App.savedSettings,Self.txt_NexusModFolder.Text,True)
 		    Utils.WriteFile(App.savedSettings,Self.txt_SteamModsFolder.Text,False)
 		    
 		    App.manualModsFolder= New FolderItem(Self.txt_NexusModFolder.Text.Trim)
 		    App.enabledModsFile= App.manualModsFolder.Child("modlist.json")
 		    
-		    If(chk_NotSteamUser.Value=False) Then
+		    If(chk_NotSteamUser.Value=False And Self.txt_SteamModsFolder.Text.Trim<>"") Then
 		      App.steamModsFile= New FolderItem(Self.txt_SteamModsFolder.Text.Trim)
 		    Else
 		      App.steamUser=False

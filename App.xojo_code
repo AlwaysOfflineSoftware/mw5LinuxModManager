@@ -6,7 +6,8 @@ Inherits DesktopApplication
 		  // ~/.steam/steam/steamapps/common/MechWarrior 5 Mercenaries/MW5Mercs/Mods
 		  // ~/.steam/steam/steamapps/workshop/content/784080
 		  
-		  If(SpecialFolder.UserHome.child(".steam").Exists) Then
+		  If(SpecialFolder.UserHome.child(".steam").child("steam").child("steamapps")._
+		    Child("common").Child("MechWarrior 5 Mercenaries").Exists) Then
 		    BaseDir= SpecialFolder.UserHome.child(".steam").Child("steam")_
 		    .Child("steamapps")
 		    
