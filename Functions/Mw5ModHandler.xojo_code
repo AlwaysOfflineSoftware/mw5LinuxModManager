@@ -59,7 +59,8 @@ Protected Module Mw5ModHandler
 		      If(item.DisplayName.Contains(".")) Then
 		        Continue
 		      Else
-		        If(App.steamModsFile.child(item.Name).child("mod.json.bak").Exists) then
+		        If(App.steamModsFile.child(item.Name).child("mod.json.bak").Exists Or _
+		           App.steamModsFile.child(item.Name).child("mod.json").Exists= False) Then
 		          Continue
 		        Else
 		          App.steamModsFile.child(item.Name).child("mod.json")._
@@ -75,7 +76,8 @@ Protected Module Mw5ModHandler
 		      If(item.DisplayName.Contains(".")) Then
 		        Continue
 		      Else
-		        If(App.manualModsFolder.child(item.Name).child("mod.json.bak").Exists) Then
+		        If(App.manualModsFolder.child(item.Name).child("mod.json.bak").Exists Or _
+		          App.manualModsFolder.child(item.Name).child("mod.json").Exists= False) Then
 		          Continue
 		        Else
 		          App.manualModsFolder.child(item.Name).child("mod.json")._
@@ -181,7 +183,7 @@ Protected Module Mw5ModHandler
 		  // Steam Mods
 		  If(App.steamUser And App.steamModsFile.Exists) Then
 		    For Each item As FolderItem In App.steamModsFile.Children
-		      If(item.DisplayName.Contains(".")) Then
+		      If(item.IsFolder= False Or item.child("mod.json").Exists= False) Then
 		        Continue
 		      Else
 		        // System.DebugLog(App.steamModsFile.child(item.Name).child("mod.json").NativePath)
@@ -194,7 +196,7 @@ Protected Module Mw5ModHandler
 		  // Manual Mods
 		  If(App.manualModsFolder.Exists) Then
 		    For Each item As FolderItem In App.manualModsFolder.Children
-		      If(item.DisplayName.Contains(".")) Then
+		      If(item.IsFolder= False Or item.child("mod.json").Exists= False) Then
 		        Continue
 		      Else
 		        App.modLocationMap.Value(App.manualModsFolder.child(item.Name).child("mod.json").NativePath)=_
@@ -212,7 +214,7 @@ Protected Module Mw5ModHandler
 		      modName= pathString(pathString.LastIndex-1) //tempDict.Lookup("displayName","ERR")
 		      modOrder= tempDict.Lookup("defaultLoadOrder","ERR")
 		      modID= modName.Left(2).Lowercase + modName.Right(2).Lowercase +_
-		       modName.Length.ToString
+		      modName.Length.ToString
 		      
 		      If(App.steamUser) Then
 		        If(modKey.Contains(App.steamModsFile.NativePath)) Then
