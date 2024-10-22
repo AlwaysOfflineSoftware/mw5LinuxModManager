@@ -97,7 +97,7 @@ Begin DesktopWindow OrderInputScreen
       Visible         =   True
       Width           =   314
    End
-   Begin DesktopButton btn_OK
+   Begin DesktopButton btn_Apply
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
@@ -122,7 +122,7 @@ Begin DesktopWindow OrderInputScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   20
+      Top             =   18
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -317,7 +317,7 @@ End
 
 #tag EndWindowCode
 
-#tag Events btn_OK
+#tag Events btn_Apply
 	#tag Event
 		Sub Pressed()
 		  Var lsb_ref As DesktopListBox= MainScreen.lsb_ModOrderList
@@ -326,16 +326,10 @@ End
 		  
 		  Var canChangeLoadOrder As Boolean= False
 		  
-		  Var col_enabled As Integer= 0
-		  Var col_id As Integer= 1
-		  Var col_name As Integer= 2
-		  Var col_order As Integer= 3
-		  Var col_steam As Integer= 4
-		  
 		  // Order Number
 		  For i As Integer= 0 To lsb_ref.RowCount-1 
-		    lsb_ref.CellTextAt(selectedRow,col_order)= targetCurrentOrder
-		    If(lsb_ref.CellTextAt(i,col_steam)="Y") Then
+		    lsb_ref.CellTextAt(selectedRow,App.COL_ORDER)= targetCurrentOrder
+		    If(lsb_ref.CellTextAt(i,App.COL_STEAM)="Y") Then
 		      Mw5ModHandler.UpdateModDictionary(targetName,targetCurrentOrder,True)
 		    Else
 		      Mw5ModHandler.UpdateModDictionary(targetName,targetCurrentOrder,False)

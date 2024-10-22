@@ -366,7 +366,7 @@ Begin DesktopWindow SettingsScreen
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   204
+      Left            =   112
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -506,7 +506,9 @@ End
 #tag Events btn_HardReset
 	#tag Event
 		Sub Pressed()
-		  Mw5ModHandler.RevertToOriginal
+		  Mw5ModHandler.RevertAll
+		  Mw5ModHandler.ReloadMods
+		  SettingsScreen.close
 		End Sub
 	#tag EndEvent
 #tag EndEvents

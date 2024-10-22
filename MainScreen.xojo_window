@@ -541,22 +541,23 @@ End
 	#tag Event
 		Function DragReorderRows(newPosition as Integer, parentRow as Integer) As Boolean
 		  If(newPosition=0) Then
-		    Me.CellTextAt(Me.SelectedRowIndex,3)= "0"
-		    If(Me.CellTextAt(Me.SelectedRowIndex,5)="Y") Then
-		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,2),"0",True)
+		    Me.CellTextAt(Me.SelectedRowIndex,App.COL_ORDER)= "0"
+		    If(Me.CellTextAt(Me.SelectedRowIndex,App.COL_STEAM)="Y") Then
+		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME),"0",True)
 		    Else
-		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,2),"0",False)
+		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME),"0",False)
 		    End
 		  Else
-		    Me.CellTextAt(Me.SelectedRowIndex,3)= Me.CellTextAt(newPosition,3)
-		    If(Me.CellTextAt(Me.SelectedRowIndex,5)="Y") Then
-		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,2),_
-		      Me.CellTextAt(newPosition,3),True)
+		    Me.CellTextAt(Me.SelectedRowIndex,App.COL_ORDER)= Me.CellTextAt(newPosition,App.COL_ORDER)
+		    If(Me.CellTextAt(Me.SelectedRowIndex,App.COL_STEAM)="Y") Then
+		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME),_
+		      Me.CellTextAt(newPosition,App.COL_ORDER),True)
 		    Else
-		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,2),_
-		      Me.CellTextAt(newPosition,3),False)
+		      Mw5ModHandler.UpdateModDictionary(Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME),_
+		      Me.CellTextAt(newPosition,App.COL_ORDER),False)
 		    End
-		  End 
+		  End
+		  
 		End Function
 	#tag EndEvent
 	#tag Event
@@ -577,6 +578,7 @@ End
 		    Return True
 		  Else
 		    base.AddMenu(New MenuItem("Edit"))
+		    base.AddMenu(New MenuItem("Revert Load Order"))
 		    If(Me.CellTextAt(Me.SelectedRowIndex,App.COL_STEAM)<>"Y") Then
 		      base.AddMenu(New MenuItem("Uninstall"))
 		    End
@@ -586,11 +588,16 @@ End
 	#tag EndEvent
 	#tag Event
 		Function ContextualMenuItemSelected(selectedItem As DesktopMenuItem) As Boolean
+		  Var modSelected As String= Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME)
+		  
 		  Select Case selectedItem.Text
 		  Case "Edit"
 		    OrderInputScreen.show
+		  Case "Revert Load Order"
+		    Var reverted As Boolean= Mw5ModHandler.RevertMod(modSelected)
+		    Mw5ModHandler.ReloadMods
+		    Utils.ErrorHandler(1, modSelected + " was reverted to backup!","") 
 		  Case "Uninstall"
-		    Var modSelected As String= Me.CellTextAt(Me.SelectedRowIndex,App.COL_NAME)
 		    Var uninstalled As Boolean= SharedModTools.RemoveMod(modSelected)
 		    
 		    If(uninstalled) Then
