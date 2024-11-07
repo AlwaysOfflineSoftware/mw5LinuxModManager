@@ -719,15 +719,27 @@ End
 #tag Events btn_Toggle
 	#tag Event
 		Sub Pressed()
-		  
-		  If(Self.lsb_ModOrderList.SelectedRowIndex<>-1) Then
-		    If(Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y") Then
-		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)=" "
-		    Else
-		      Self.lsb_ModOrderList.CellTextAt(Self.lsb_ModOrderList.SelectedRowIndex,0)="Y"
-		    End
-		  end
+		  SharedModTools.ToggleMods
 		End Sub
+	#tag EndEvent
+	#tag Event
+		Function ConstructContextualMenu(base As DesktopMenuItem, x As Integer, y As Integer) As Boolean
+		  base.AddMenu(New MenuItem("Toggle All OFF"))
+		  base.AddMenu(New MenuItem("Toggle All ON"))
+		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Function ContextualMenuItemSelected(selectedItem As DesktopMenuItem) As Boolean
+		  Select Case selectedItem.Text
+		  Case "Toggle All OFF"
+		    SharedModTools.ToggleAllMods(False)
+		  Case "Toggle All ON"
+		    SharedModTools.ToggleAllMods(True)
+		  End Select
+		  
+		  Return True
+		End Function
 	#tag EndEvent
 #tag EndEvents
 #tag Events btn_Edit

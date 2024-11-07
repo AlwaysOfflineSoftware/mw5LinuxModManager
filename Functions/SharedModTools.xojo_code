@@ -84,6 +84,31 @@ Protected Module SharedModTools
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub ToggleAllMods(activate as Boolean)
+		  For row As Integer=0 To MainScreen.lsb_ModOrderList.LastRowIndex
+		    If(activate) Then
+		      MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_ENABLED)="Y"
+		    Else
+		      MainScreen.lsb_ModOrderList.CellTextAt(row,App.COL_ENABLED)=" "
+		    End
+		  Next
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ToggleMods()
+		  If(MainScreen.lsb_ModOrderList.SelectedRowIndex<>-1) Then
+		    If(MainScreen.lsb_ModOrderList.CellTextAt(MainScreen.lsb_ModOrderList.SelectedRowIndex,0)="Y") Then
+		      MainScreen.lsb_ModOrderList.CellTextAt(MainScreen.lsb_ModOrderList.SelectedRowIndex,0)=" "
+		    Else
+		      MainScreen.lsb_ModOrderList.CellTextAt(MainScreen.lsb_ModOrderList.SelectedRowIndex,0)="Y"
+		    End
+		  End
+		End Sub
+	#tag EndMethod
+
 
 	#tag ViewBehavior
 		#tag ViewProperty
