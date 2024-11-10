@@ -582,6 +582,8 @@ End
 		    If(Me.CellTextAt(Me.SelectedRowIndex,App.COL_STEAM)<>"Y") Then
 		      base.AddMenu(New MenuItem("Uninstall"))
 		    End
+		    base.AddMenu(New MenuItem("Move to Top"))
+		    base.AddMenu(New MenuItem("Move to Bottom"))
 		  End
 		  
 		End Function
@@ -606,9 +608,14 @@ End
 		      Utils.ErrorHandler(1, "Uninstall Failed","Please check the selected mod,"_
 		      + "refresh the load order and try again") 
 		    End
+		  Case "Move to Top"
+		    SharedModTools.MoveModTo(True)
+		  Case "Move to Bottom"
+		    SharedModTools.MoveModTo(False)
 		  End Select
 		  
 		  Return True
+		  
 		End Function
 	#tag EndEvent
 	#tag Event

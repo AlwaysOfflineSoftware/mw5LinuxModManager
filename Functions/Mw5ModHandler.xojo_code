@@ -258,7 +258,7 @@ Protected Module Mw5ModHandler
 		  Next
 		  
 		  CheckEnabled
-		  MainScreen.lsb_ModOrderList.SortingColumn=3
+		  MainScreen.lsb_ModOrderList.SortingColumn=App.COL_ORDER
 		  MainScreen.lsb_ModOrderList.Sort
 		  
 		  

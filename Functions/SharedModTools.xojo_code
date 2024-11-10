@@ -47,6 +47,21 @@ Protected Module SharedModTools
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub MoveModTo(Top as Boolean, designatedPlace as integer = 99)
+		  Var modlist As DesktopListBox= MainScreen.lsb_ModOrderList
+		  
+		  If(top) Then
+		    modlist.CellTextAt(modlist.SelectedRowIndex,App.COL_ORDER)= "0"
+		  Else
+		    modlist.CellTextAt(modlist.SelectedRowIndex,App.COL_ORDER)= designatedPlace.ToString
+		  End
+		  
+		  MainScreen.lsb_ModOrderList.SortingColumn=App.COL_ORDER
+		  MainScreen.lsb_ModOrderList.Sort
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub populateLoadouts()
 		  MainScreen.pop_SavedLoadouts.RemoveAllRows
 		  MainScreen.pop_SavedLoadouts.AddRow("<new>")
