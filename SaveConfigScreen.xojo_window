@@ -40,8 +40,8 @@ Begin DesktopWindow SaveConfigScreen
       Left            =   512
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
+      LockLeft        =   False
+      LockRight       =   True
       LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
@@ -71,8 +71,8 @@ Begin DesktopWindow SaveConfigScreen
       Left            =   420
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
+      LockLeft        =   False
+      LockRight       =   True
       LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
@@ -139,7 +139,7 @@ Begin DesktopWindow SaveConfigScreen
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   True
       MaximumCharactersAllowed=   0
       Password        =   False
@@ -170,11 +170,11 @@ Begin DesktopWindow SaveConfigScreen
       Index           =   -2147483648
       Italic          =   False
       Left            =   20
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
-      LockTop         =   True
+      LockTop         =   False
       Multiline       =   False
       Scope           =   0
       Selectable      =   False

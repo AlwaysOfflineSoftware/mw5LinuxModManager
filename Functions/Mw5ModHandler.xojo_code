@@ -53,7 +53,6 @@ Protected Module Mw5ModHandler
 	#tag Method, Flags = &h0
 		Sub BackupOriginal()
 		  // Steam Mods
-		  
 		  If(App.SteamUser And App.steamModsFile.Exists) Then
 		    For Each item As FolderItem In App.steamModsFile.Children
 		      If(item.DisplayName.Contains(".")) Then
@@ -99,7 +98,6 @@ Protected Module Mw5ModHandler
 
 	#tag Method, Flags = &h0
 		Sub CheckEnabled()
-		  
 		  If(App.enabledModsFile.Exists) Then
 		    Var enabledFileContents As String= Utils.ReadFile(App.enabledModsFile.NativePath)
 		    Var name As String
@@ -302,7 +300,6 @@ Protected Module Mw5ModHandler
 
 	#tag Method, Flags = &h0
 		Function RevertMod(modName as String) As Boolean
-		  
 		  // Steam Mods
 		  If(App.SteamUser) Then
 		    For Each item As FolderItem In App.steamModsFile.Children
@@ -344,6 +341,39 @@ Protected Module Mw5ModHandler
 
 	#tag Method, Flags = &h0
 		Sub SaveDependancies()
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Startup()
+		  // ~/.steam/steam/steamapps/common/MechWarrior 5 Mercenaries/MW5Mercs/Mods
+		  // ~/.steam/steam/steamapps/workshop/content/784080
+		  
+		  If(SpecialFolder.UserHome.child(".steam").child("steam").child("steamapps")._
+		    Child("common").Child("MechWarrior 5 Mercenaries").Exists) Then
+		    App.BaseDir= SpecialFolder.UserHome.child(".steam").Child("steam")_
+		    .Child("steamapps")
+		    
+		    App.manualModsFolder= App.BaseDir.Child("common").Child("MechWarrior 5 Mercenaries")_
+		    .Child("MW5Mercs").Child("Mods")
+		    
+		    App.enabledModsFile= App.manualModsFolder.child("modlist.json")
+		    
+		    App.steamModsFile= App.BaseDir.Child("workshop").Child("content").Child("784080")
+		  End
+		  
+		  App.savedConfigs= Utils.CreateFolderStructure(SpecialFolder.UserHome,_
+		  ".config/AlwaysOfflineSoftware/MW5LinuxModder/")
+		  
+		  App.modIDMap= New Dictionary
+		  App.modLocationMap= New Dictionary
+		  
+		  If(Not App.savedConfigs.child("settings.ini").Exists) Then
+		    Utils.WriteFile(App.savedConfigs.child("settings.ini"),"", True)
+		  End
+		  
+		  App.savedSettings= App.savedConfigs.child("settings.ini")
 		  
 		End Sub
 	#tag EndMethod

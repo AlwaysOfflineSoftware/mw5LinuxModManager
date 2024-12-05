@@ -362,6 +362,8 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
+		  Mw5ModHandler.Startup
+		  
 		  Var settingsArr() As String= Utils.ReadFile(App.savedSettings.NativePath).Split(EndOfLine)
 		  
 		  If(settingsArr(0)="") Then

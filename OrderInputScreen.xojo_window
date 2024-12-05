@@ -113,8 +113,8 @@ Begin DesktopWindow OrderInputScreen
       Left            =   346
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
+      LockLeft        =   False
+      LockRight       =   True
       LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
@@ -122,7 +122,7 @@ Begin DesktopWindow OrderInputScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   18
+      Top             =   20
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -144,8 +144,8 @@ Begin DesktopWindow OrderInputScreen
       Left            =   346
       LockBottom      =   False
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
+      LockLeft        =   False
+      LockRight       =   True
       LockTop         =   True
       MacButtonStyle  =   0
       Scope           =   0
@@ -182,7 +182,7 @@ Begin DesktopWindow OrderInputScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   57
+      Top             =   59
       Transparent     =   False
       Underline       =   False
       Visible         =   True

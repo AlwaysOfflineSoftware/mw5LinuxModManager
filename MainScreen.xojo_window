@@ -389,11 +389,11 @@ Begin DesktopWindow MainScreen
       Index           =   -2147483648
       Italic          =   False
       Left            =   20
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
-      LockTop         =   True
+      LockTop         =   False
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   16
@@ -420,11 +420,11 @@ Begin DesktopWindow MainScreen
       Index           =   -2147483648
       Italic          =   False
       Left            =   20
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
-      LockTop         =   True
+      LockTop         =   False
       MacButtonStyle  =   0
       Scope           =   0
       TabIndex        =   17
@@ -598,14 +598,14 @@ End
 		  Case "Revert Load Order"
 		    Var reverted As Boolean= Mw5ModHandler.RevertMod(modSelected)
 		    Mw5ModHandler.ReloadMods
-		    Utils.ErrorHandler(1, modSelected + " was reverted to backup!","") 
+		    Utils.PopupMessage(1, modSelected + " was reverted to backup!","") 
 		  Case "Uninstall"
 		    Var uninstalled As Boolean= SharedModTools.RemoveMod(modSelected)
 		    
 		    If(uninstalled) Then
-		      Utils.ErrorHandler(1, modSelected + " was uninstalled!","") 
+		      Utils.PopupMessage(1, modSelected + " was uninstalled!","") 
 		    Else
-		      Utils.ErrorHandler(1, "Uninstall Failed","Please check the selected mod,"_
+		      Utils.PopupMessage(1, "Uninstall Failed","Please check the selected mod,"_
 		      + "refresh the load order and try again") 
 		    End
 		  Case "Move to Top"
@@ -770,9 +770,9 @@ End
 		  If(modArchive<>Nil And modArchive.Exists) Then
 		    installed= SharedModTools.InstallMod(modArchive)
 		    If(installed) Then
-		      Utils.ErrorHandler(1, modArchive.Name + " was installed!","") 
+		      Utils.PopupMessage(1, modArchive.Name + " was installed!","") 
 		    Else
-		      Utils.ErrorHandler(1, "install Failed","Please check the selected mod,"_
+		      Utils.PopupMessage(1, "install Failed","Please check the selected mod,"_
 		      + "to make sure it is a supported format and is not corrupt") 
 		    End
 		  End

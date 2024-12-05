@@ -26,7 +26,7 @@ Protected Module SharedModTools
 		  Else
 		    
 		    If(Not batchmode) Then
-		      Utils.ErrorHandler(3,"Unsupported archive format",_
+		      Utils.PopupMessage(3,"Unsupported archive format",_
 		      "Please extract manually and archive as a zip file")
 		    End
 		    

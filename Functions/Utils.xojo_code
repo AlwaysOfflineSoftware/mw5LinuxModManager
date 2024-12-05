@@ -28,7 +28,33 @@ Protected Module Utils
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ErrorHandler(typeCode as integer, message as String, explain as String)
+		Function LoadPicture(file As folderitem, newWidth As Integer = 0, newHeight As Integer = 0) As Picture
+		  Var original As Picture= Picture.Open(file)
+		  
+		  Dim newPict As New Picture(newWidth, newHeight, original.Depth )
+		  newPict.Graphics.DrawPicture(_
+		   original, 0, 0, newPict.Width, newPict.Height, 0, 0, original.Width, original.Height )
+		  
+		  return newPict
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function LoadPicture(pict As Picture, newWidth As Integer = 0, newHeight As Integer = 0) As Picture
+		  Var original As Picture= pict
+		  
+		  Dim newPict As New Picture(newWidth, newHeight, original.Depth )
+		  newPict.Graphics.DrawPicture(_
+		   original, 0, 0, newPict.Width, newPict.Height, 0, 0, original.Width, original.Height )
+		  
+		  Return newPict
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub PopupMessage(typeCode as integer, message as String, explain as String)
 		  Var diag As New MessageDialog                  // declare the MessageDialog object
 		  Var clickItem As MessageDialogButton                // for handling the result
 		  
@@ -74,15 +100,15 @@ Protected Module Utils
 		  Var t As TextInputStream
 		  Var contents As String
 		  
-		  If f <> Nil Then
+		  If(f <> Nil) Then
 		    t = TextInputStream.Open(f)
 		    t.Encoding = Encodings.UTF8 //specify encoding of input stream
 		    contents = t.ReadAll
 		    t.Close
 		    Return contents
-		  End If
+		  End
 		  
-		  return ""
+		  Return ""
 		End Function
 	#tag EndMethod
 
@@ -92,15 +118,15 @@ Protected Module Utils
 		  Var t As TextInputStream
 		  Var contents As String
 		  
-		  If f <> Nil Then
+		  If(f <> Nil) Then
 		    t = TextInputStream.Open(f)
 		    t.Encoding = Encodings.UTF8 //specify encoding of input stream
 		    contents = t.ReadAll
 		    t.Close
 		    Return contents
-		  End If
+		  End
 		  
-		  return ""
+		  Return ""
 		End Function
 	#tag EndMethod
 
@@ -182,7 +208,7 @@ Protected Module Utils
 		    End
 		    
 		    If(cmd.ExitCode <> 0) Then
-		      ErrorHandler(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
+		      PopupMessage(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
 		    End If
 		    
 		  Else
@@ -194,11 +220,48 @@ Protected Module Utils
 		    End
 		    
 		    If(cmd.ExitCode <> 0) Then
-		      ErrorHandler(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
+		      PopupMessage(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
 		    End If
 		  End
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ShellCommand(command as String, sudo as Boolean = False, asynchExec as Boolean = False) As String
+		  Var cmd As New shell
+		  
+		  If(asynchExec) Then
+		    cmd.ExecuteMode= Shell.ExecuteModes.Asynchronous
+		    
+		    If(sudo) Then
+		      cmd.Execute("pkexec " + command)
+		      Return cmd.Result
+		    Else
+		      cmd.Execute(command)
+		      Return cmd.Result
+		    End
+		    
+		    If(cmd.ExitCode <> 0) Then
+		      PopupMessage(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
+		    End If
+		    
+		  Else
+		    // Default Synchronous
+		    If(sudo) Then
+		      cmd.Execute("pkexec " + command)
+		      Return cmd.Result
+		    Else
+		      cmd.Execute(command)
+		      Return cmd.Result
+		    End
+		    
+		    If(cmd.ExitCode <> 0) Then
+		      PopupMessage(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
+		    End If
+		  End
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -236,9 +299,8 @@ Protected Module Utils
 		      End If
 		    End
 		  Catch e As IOException
-		    ErrorHandler(2,"IO Issue writing file", "File could not be written to: ' + folder.URLPath + '")
+		    PopupMessage(2,"IO Issue writing file", "File could not be written to: ' + folder.URLPath + '")
 		  End Try
-		  
 		  
 		  
 		  
@@ -247,8 +309,8 @@ Protected Module Utils
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub WriteFile(path as String, data as string, overwrite as boolean)
-		  Var fullFilePath As FolderItem= new FolderItem(path)
+		Sub WriteFile(path as String, data as string, overwrite as boolean, permissions as String = "nil")
+		  Var fullFilePath As FolderItem= New FolderItem(path)
 		  Var output As TextOutputStream
 		  
 		  Try
@@ -271,9 +333,8 @@ Protected Module Utils
 		      End If
 		    End
 		  Catch e As IOException
-		    ErrorHandler(2,"IO Issue writing file", "File could not be written to: ' + folder.URLPath + '")
+		    PopupMessage(2,"IO Issue writing file", "File could not be written to: ' + folder.URLPath + '")
 		  End Try
-		  
 		  
 		  
 		  

@@ -1,44 +1,6 @@
 #tag Class
 Protected Class App
 Inherits DesktopApplication
-	#tag Event
-		Sub Opening()
-		  // ~/.steam/steam/steamapps/common/MechWarrior 5 Mercenaries/MW5Mercs/Mods
-		  // ~/.steam/steam/steamapps/workshop/content/784080
-		  
-		  If(SpecialFolder.UserHome.child(".steam").child("steam").child("steamapps")._
-		    Child("common").Child("MechWarrior 5 Mercenaries").Exists) Then
-		    BaseDir= SpecialFolder.UserHome.child(".steam").Child("steam")_
-		    .Child("steamapps")
-		    
-		    manualModsFolder= BaseDir.Child("common").Child("MechWarrior 5 Mercenaries")_
-		    .Child("MW5Mercs").Child("Mods")
-		    
-		    enabledModsFile= manualModsFolder.child("modlist.json")
-		    
-		    steamModsFile= BaseDir.Child("workshop").Child("content").Child("784080")
-		  End
-		  
-		  savedConfigs= Utils.CreateFolderStructure(SpecialFolder.UserHome,_
-		  ".config/AlwaysOfflineSoftware/MW5LinuxModder/")
-		  
-		  modIDMap= New Dictionary
-		  modLocationMap= New Dictionary
-		  
-		  If(Not savedConfigs.child("settings.ini").Exists) Then
-		    Utils.WriteFile(savedConfigs.child("settings.ini"),"", True)
-		  End
-		  
-		  savedSettings= savedConfigs.child("settings.ini")
-		  Var settingsArr() As String= Utils.ReadFile(App.savedSettings.NativePath).Split(EndOfLine)
-		  
-		  
-		  
-		  
-		End Sub
-	#tag EndEvent
-
-
 	#tag Property, Flags = &h0
 		BaseDir As folderItem
 	#tag EndProperty
