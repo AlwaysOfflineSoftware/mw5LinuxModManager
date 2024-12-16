@@ -2,11 +2,11 @@
 Protected Class App
 Inherits DesktopApplication
 	#tag Property, Flags = &h0
-		BaseDir As folderItem
+		enabledModsFile As Folderitem
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		enabledModsFile As Folderitem
+		launchCommand As String
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -231,6 +231,14 @@ Inherits DesktopApplication
 			InitialValue="True"
 			Type="Boolean"
 			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="launchCommand"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

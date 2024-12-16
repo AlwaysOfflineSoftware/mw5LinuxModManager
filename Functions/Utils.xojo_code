@@ -15,8 +15,7 @@ Protected Module Utils
 		  
 		  // split on remaining /
 		  splitDirString= path.Split("/")
-		  Var i As Integer
-		  For i= 0 To splitDirString.ubound
+		  For i As Integer= 0 To splitDirString.LastIndex
 		    root= root.child(splitDirString(i))
 		    If(Not root.exists) Then 
 		      root.CreateAsFolder()
@@ -25,6 +24,35 @@ Protected Module Utils
 		  
 		  Return root
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub GeneratePopup(typeCode as integer, message as String, explain as String)
+		  Var diag As New MessageDialog                  // declare the MessageDialog object
+		  Var clickItem As MessageDialogButton                // for handling the result
+		  
+		  Select Case typeCode
+		  Case 1
+		    diag.IconType = MessageDialog.IconTypes.None
+		  Case 2
+		    diag.IconType = MessageDialog.IconTypes.Caution
+		  Case 3
+		    diag.IconType = MessageDialog.IconTypes.Stop
+		  Else
+		    diag.IconType = MessageDialog.IconTypes.Question
+		  End Select
+		  
+		  diag.ActionButton.Visible=True
+		  diag.CancelButton.Visible = False
+		  diag.Message = message
+		  diag.Explanation = explain
+		  
+		  clickItem = diag.ShowModal
+		  Select Case clickItem
+		  Case diag.ActionButton
+		    clickItem.Cancel= true
+		  End Select
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -51,35 +79,6 @@ Protected Module Utils
 		  Return newPict
 		  
 		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub PopupMessage(typeCode as integer, message as String, explain as String)
-		  Var diag As New MessageDialog                  // declare the MessageDialog object
-		  Var clickItem As MessageDialogButton                // for handling the result
-		  
-		  Select Case typeCode
-		  Case 1
-		    diag.IconType = MessageDialog.IconTypes.None
-		  Case 2
-		    diag.IconType = MessageDialog.IconTypes.Caution
-		  Case 3
-		    diag.IconType = MessageDialog.IconTypes.Stop
-		  Else
-		    diag.IconType = MessageDialog.IconTypes.Question
-		  End Select
-		  
-		  diag.ActionButton.Visible=True
-		  diag.CancelButton.Visible = False
-		  diag.Message = message
-		  diag.Explanation = explain
-		  
-		  clickItem = diag.ShowModal
-		  Select Case clickItem
-		  Case diag.ActionButton
-		    clickItem.Cancel= true
-		  End Select
-		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -208,7 +207,7 @@ Protected Module Utils
 		    End
 		    
 		    If(cmd.ExitCode <> 0) Then
-		      PopupMessage(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
+		      GeneratePopup(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
 		    End If
 		    
 		  Else
@@ -220,7 +219,7 @@ Protected Module Utils
 		    End
 		    
 		    If(cmd.ExitCode <> 0) Then
-		      PopupMessage(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
+		      GeneratePopup(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
 		    End If
 		  End
 		  
@@ -243,7 +242,7 @@ Protected Module Utils
 		    End
 		    
 		    If(cmd.ExitCode <> 0) Then
-		      PopupMessage(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
+		      GeneratePopup(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
 		    End If
 		    
 		  Else
@@ -257,8 +256,84 @@ Protected Module Utils
 		    End
 		    
 		    If(cmd.ExitCode <> 0) Then
-		      PopupMessage(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
+		      GeneratePopup(3,"Shell Command Failed","The exit code is: " + cmd.ExitCode.ToString)
 		    End If
+		  End
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ValidatePath(dirString as String) As Boolean
+		  Var homedDirString As String
+		  Var userSplit() As String= SpecialFolder.UserHome.NativePath.Split("/")
+		  Var username As String= userSplit(2)
+		  Var buildingPath As New FolderItem("/")
+		  Var pathStillValid As Boolean= True
+		  
+		  If(dirString="~") Then
+		    homedDirString= dirString.Replace("~",SpecialFolder.UserHome.NativePath)
+		  Else
+		    homedDirString= dirString.Replace("~","/home/"+username)
+		  End
+		  
+		  Var splitDirString() As String= homedDirString.Split("/")
+		  
+		  // System.DebugLog(buildingPath.child("opt").NativePath)
+		  
+		  If(homedDirString= "/" Or homedDirString+"/" = SpecialFolder.UserHome.NativePath) Then
+		    Return True
+		  Else
+		    For i As Integer= 0 To splitDirString.Count-1
+		      buildingPath= buildingPath.child(splitDirString(i))
+		      If(Not buildingPath.exists) Then 
+		        Return False
+		      End
+		    Next
+		  End
+		  
+		  Return True
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ValidatePath(dirString as String, exportPath as Boolean) As String
+		  Var homedDirString As String
+		  Var userSplit() As String= SpecialFolder.UserHome.NativePath.Split("/")
+		  Var username As String= userSplit(2)
+		  Var buildingPath As New FolderItem("/")
+		  Var pathStillValid As Boolean= True
+		  
+		  If(dirString="~") Then
+		    homedDirString= dirString.Replace("~",SpecialFolder.UserHome.NativePath)
+		  Else
+		    homedDirString= dirString.Replace("~","/home/"+username)
+		  End
+		  
+		  Var splitDirString() As String= homedDirString.Split("/")
+		  
+		  // System.DebugLog(buildingPath.child("opt").NativePath)
+		  
+		  If(homedDirString= "/" Or homedDirString+"/" = SpecialFolder.UserHome.NativePath) Then
+		    If(exportPath) Then
+		      Return SpecialFolder.UserHome.NativePath
+		    Else
+		      Return "Valid"
+		    End
+		  Else
+		    For i As Integer= 0 To splitDirString.Count-1
+		      buildingPath= buildingPath.child(splitDirString(i))
+		      If(Not buildingPath.exists) Then 
+		        Return "Invalid"
+		      End
+		    Next
+		  End
+		  
+		  If(exportPath) Then
+		    Return buildingPath.NativePath
+		  Else
+		    Return "Valid"
 		  End
 		  
 		End Function
@@ -299,7 +374,7 @@ Protected Module Utils
 		      End If
 		    End
 		  Catch e As IOException
-		    PopupMessage(2,"IO Issue writing file", "File could not be written to: ' + folder.URLPath + '")
+		    GeneratePopup(2,"IO Issue writing file", "File could not be written to: ' + folder.URLPath + '")
 		  End Try
 		  
 		  
@@ -333,7 +408,7 @@ Protected Module Utils
 		      End If
 		    End
 		  Catch e As IOException
-		    PopupMessage(2,"IO Issue writing file", "File could not be written to: ' + folder.URLPath + '")
+		    GeneratePopup(2,"IO Issue writing file", "File could not be written to: ' + folder.URLPath + '")
 		  End Try
 		  
 		  

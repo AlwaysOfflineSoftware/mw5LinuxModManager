@@ -72,37 +72,6 @@ Begin DesktopWindow MainScreen
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
-   Begin DesktopButton btn_Apply
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "Apply"
-      Default         =   True
-      Enabled         =   True
-      FontName        =   "Liberation Sans"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   26
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   20
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   1
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   "Finalizes the load order"
-      Top             =   20
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
    Begin DesktopImageViewer imv_LoadedGame
       Active          =   False
       AllowAutoDeactivate=   True
@@ -132,75 +101,13 @@ Begin DesktopWindow MainScreen
       _mName          =   ""
       _mPanelIndex    =   0
    End
-   Begin DesktopButton btn_Refresh
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "Refresh"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "Liberation Sans"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   26
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   20
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   5
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   "pulls the load order from file"
-      Top             =   58
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
-   Begin DesktopButton btn_Donate
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "Donate"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "Liberation Sans"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   26
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   20
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   6
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   354
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
-   Begin DesktopButton btn_launchGame
+   Begin DesktopButton btn_LaunchGame
       AllowAutoDeactivate=   True
       Bold            =   False
       Cancel          =   False
       Caption         =   "Launch MW5"
       Default         =   False
-      Enabled         =   False
+      Enabled         =   True
       FontName        =   "Liberation Sans"
       FontSize        =   0.0
       FontUnit        =   0
@@ -218,7 +125,7 @@ Begin DesktopWindow MainScreen
       TabIndex        =   9
       TabPanelIndex   =   0
       TabStop         =   True
-      Tooltip         =   "Coming Soon! "
+      Tooltip         =   "Steam users can launch the game here!"
       Top             =   354
       Transparent     =   False
       Underline       =   False
@@ -437,18 +344,31 @@ Begin DesktopWindow MainScreen
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopButton btn_Install
+   Begin DesktopBevelButton btn_Apply
+      Active          =   False
       AllowAutoDeactivate=   True
+      AllowFocus      =   True
+      AllowTabStop    =   True
+      BackgroundColor =   &c45454500
+      BevelStyle      =   1
       Bold            =   False
-      Cancel          =   False
-      Caption         =   "Install"
-      Default         =   False
+      ButtonStyle     =   0
+      Caption         =   "Apply"
+      CaptionAlignment=   3
+      CaptionDelta    =   0
+      CaptionPosition =   1
       Enabled         =   True
-      FontName        =   "System"
+      FontName        =   "Liberation Sans"
       FontSize        =   0.0
       FontUnit        =   0
+      HasBackgroundColor=   True
       Height          =   26
+      Icon            =   0
+      IconAlignment   =   0
+      IconDeltaX      =   0
+      IconDeltaY      =   0
       Index           =   -2147483648
+      InitialParent   =   ""
       Italic          =   False
       Left            =   20
       LockBottom      =   False
@@ -456,17 +376,173 @@ Begin DesktopWindow MainScreen
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      MacButtonStyle  =   0
+      MenuStyle       =   0
+      PanelIndex      =   0
       Scope           =   0
-      TabIndex        =   18
+      TabIndex        =   19
       TabPanelIndex   =   0
-      TabStop         =   True
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   20
+      Transparent     =   False
+      Underline       =   False
+      Value           =   False
+      Visible         =   True
+      Width           =   80
+      _mIndex         =   0
+      _mInitialParent =   ""
+      _mName          =   ""
+      _mPanelIndex    =   0
+   End
+   Begin DesktopBevelButton btn_Install
+      Active          =   False
+      AllowAutoDeactivate=   True
+      AllowFocus      =   True
+      AllowTabStop    =   True
+      BackgroundColor =   &c45454500
+      BevelStyle      =   1
+      Bold            =   False
+      ButtonStyle     =   0
+      Caption         =   "Install"
+      CaptionAlignment=   3
+      CaptionDelta    =   0
+      CaptionPosition =   1
+      Enabled         =   True
+      FontName        =   "Liberation Sans"
+      FontSize        =   0.0
+      FontUnit        =   0
+      HasBackgroundColor=   True
+      Height          =   26
+      Icon            =   0
+      IconAlignment   =   0
+      IconDeltaX      =   0
+      IconDeltaY      =   0
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MenuStyle       =   0
+      PanelIndex      =   0
+      Scope           =   0
+      TabIndex        =   20
+      TabPanelIndex   =   0
+      TextColor       =   &c00000000
       Tooltip         =   ""
       Top             =   96
       Transparent     =   False
       Underline       =   False
+      Value           =   False
       Visible         =   True
       Width           =   80
+      _mIndex         =   0
+      _mInitialParent =   ""
+      _mName          =   ""
+      _mPanelIndex    =   0
+   End
+   Begin DesktopBevelButton btn_Refresh
+      Active          =   False
+      AllowAutoDeactivate=   True
+      AllowFocus      =   True
+      AllowTabStop    =   True
+      BackgroundColor =   &c45454500
+      BevelStyle      =   1
+      Bold            =   False
+      ButtonStyle     =   0
+      Caption         =   "Refresh"
+      CaptionAlignment=   3
+      CaptionDelta    =   0
+      CaptionPosition =   1
+      Enabled         =   True
+      FontName        =   "Liberation Sans"
+      FontSize        =   0.0
+      FontUnit        =   0
+      HasBackgroundColor=   True
+      Height          =   26
+      Icon            =   0
+      IconAlignment   =   0
+      IconDeltaX      =   0
+      IconDeltaY      =   0
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MenuStyle       =   0
+      PanelIndex      =   0
+      Scope           =   0
+      TabIndex        =   21
+      TabPanelIndex   =   0
+      TextColor       =   &c00000000
+      Tooltip         =   ""
+      Top             =   58
+      Transparent     =   False
+      Underline       =   False
+      Value           =   False
+      Visible         =   True
+      Width           =   80
+      _mIndex         =   0
+      _mInitialParent =   ""
+      _mName          =   ""
+      _mPanelIndex    =   0
+   End
+   Begin DesktopBevelButton btn_Donate
+      Active          =   False
+      AllowAutoDeactivate=   True
+      AllowFocus      =   True
+      AllowTabStop    =   True
+      BackgroundColor =   &c00610C00
+      BevelStyle      =   1
+      Bold            =   True
+      ButtonStyle     =   0
+      Caption         =   "Donate"
+      CaptionAlignment=   3
+      CaptionDelta    =   0
+      CaptionPosition =   1
+      Enabled         =   True
+      FontName        =   "Liberation Sans"
+      FontSize        =   0.0
+      FontUnit        =   0
+      HasBackgroundColor=   True
+      Height          =   26
+      Icon            =   0
+      IconAlignment   =   5
+      IconDeltaX      =   0
+      IconDeltaY      =   0
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MenuStyle       =   0
+      PanelIndex      =   0
+      Scope           =   0
+      TabIndex        =   22
+      TabPanelIndex   =   0
+      TextColor       =   &cDCD60000
+      Tooltip         =   "Please, it helps me justify working on this!"
+      Top             =   354
+      Transparent     =   False
+      Underline       =   False
+      Value           =   False
+      Visible         =   True
+      Width           =   80
+      _mIndex         =   0
+      _mInitialParent =   ""
+      _mName          =   ""
+      _mPanelIndex    =   0
    End
 End
 #tag EndDesktopWindow
@@ -493,6 +569,14 @@ End
 		    Self.pop_SavedLoadouts.SelectedRowIndex=0
 		  End
 		  
+		  If(App.steamUser And App.launchCommand="steam steam://rungameid/784080") Then
+		    Me.btn_LaunchGame.Enabled= True
+		  ElseIf(App.launchCommand<>"steam steam://rungameid/784080" And _
+		    App.launchCommand<>"") Then
+		    Me.btn_LaunchGame.Enabled= True
+		  Else
+		    Me.btn_LaunchGame.Enabled= False
+		  End
 		  
 		End Sub
 	#tag EndEvent
@@ -598,14 +682,14 @@ End
 		  Case "Revert Load Order"
 		    Var reverted As Boolean= Mw5ModHandler.RevertMod(modSelected)
 		    Mw5ModHandler.ReloadMods
-		    Utils.PopupMessage(1, modSelected + " was reverted to backup!","") 
+		    Utils.GeneratePopup(1, modSelected + " was reverted to backup!","") 
 		  Case "Uninstall"
 		    Var uninstalled As Boolean= SharedModTools.RemoveMod(modSelected)
 		    
 		    If(uninstalled) Then
-		      Utils.PopupMessage(1, modSelected + " was uninstalled!","") 
+		      Utils.GeneratePopup(1, modSelected + " was uninstalled!","") 
 		    Else
-		      Utils.PopupMessage(1, "Uninstall Failed","Please check the selected mod,"_
+		      Utils.GeneratePopup(1, "Uninstall Failed","Please check the selected mod,"_
 		      + "refresh the load order and try again") 
 		    End
 		  Case "Move to Top"
@@ -638,39 +722,14 @@ End
 		End Function
 	#tag EndEvent
 #tag EndEvents
-#tag Events btn_Apply
+#tag Events btn_LaunchGame
 	#tag Event
 		Sub Pressed()
-		  Mw5ModHandler.ApplyLoadOrder
-		  Mw5ModHandler.ApplyEnabled
-		  
-		  If(Not App.savedConfigs.child("default.txt").Exists) Then
-		    Utils.WriteFile(App.savedConfigs.child("default.txt"), "", True)
+		  Try
+		    Utils.ShellCommand(App.launchCommand,False,False)
+		  Catch e As RuntimeException
+		    Utils.GeneratePopup(1,"Something went wrong!",e.Message)
 		  End
-		  
-		  SharedModTools.SaveModLoadout("default")
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btn_Refresh
-	#tag Event
-		Sub Pressed()
-		  Mw5ModHandler.ReloadMods
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btn_Donate
-	#tag Event
-		Sub Pressed()
-		  
-		  System.GotoURL("https://alwaysoffline.gumroad.com/l/Thanks")
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btn_launchGame
-	#tag Event
-		Sub Pressed()
-		  Utils.ShellCommand("steam steam://rungameid/784080",False,True)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -761,23 +820,77 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events btn_Apply
+	#tag Event
+		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		  
+		  Me.BackgroundColor= Color.RGB(0,125,15)
+		  Return True
+		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Function MouseUp(X As Integer, Y As Integer) As Boolean
+		  Mw5ModHandler.ApplyLoadOrder
+		  Mw5ModHandler.ApplyEnabled
+		  
+		  If(Not App.savedConfigs.child("default.txt").Exists) Then
+		    Utils.WriteFile(App.savedConfigs.child("default.txt"), "", True)
+		  End
+		  
+		  SharedModTools.SaveModLoadout("default")
+		  Me.BackgroundColor= Color.RGB(69,69,69)
+		End Function
+	#tag EndEvent
+#tag EndEvents
 #tag Events btn_Install
 	#tag Event
-		Sub Pressed()
+		Function MouseDown(X As Integer, Y As Integer) As Boolean
+		  
+		  Me.BackgroundColor= Color.RGB(0,65,125)
+		  Return True
+		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Function MouseUp(X As Integer, Y As Integer) As Boolean
 		  Var modArchive As FolderItem= Utils.SelectTargetDialog("home",False)
 		  Var installed As Boolean
 		  
 		  If(modArchive<>Nil And modArchive.Exists) Then
 		    installed= SharedModTools.InstallMod(modArchive)
 		    If(installed) Then
-		      Utils.PopupMessage(1, modArchive.Name + " was installed!","") 
+		      Utils.GeneratePopup(1, modArchive.Name + " was installed!","") 
 		    Else
-		      Utils.PopupMessage(1, "install Failed","Please check the selected mod,"_
+		      Utils.GeneratePopup(1, "install Failed","Please check the selected mod,"_
 		      + "to make sure it is a supported format and is not corrupt") 
 		    End
 		  End
 		  
+		  Me.BackgroundColor= Color.RGB(69,69,69)
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_Refresh
+	#tag Event
+		Function MouseDown(X As Integer, Y As Integer) As Boolean
 		  
+		  Me.BackgroundColor= Color.RGB(125,125,15)
+		  Return True
+		  
+		End Function
+	#tag EndEvent
+	#tag Event
+		Function MouseUp(X As Integer, Y As Integer) As Boolean
+		  Mw5ModHandler.ReloadMods
+		  Me.BackgroundColor= Color.RGB(69,69,69)
+		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_Donate
+	#tag Event
+		Sub Pressed()
+		  System.GotoURL("https://alwaysoffline.gumroad.com/l/Thanks")
 		End Sub
 	#tag EndEvent
 #tag EndEvents

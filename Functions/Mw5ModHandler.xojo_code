@@ -350,30 +350,90 @@ Protected Module Mw5ModHandler
 		  // ~/.steam/steam/steamapps/common/MechWarrior 5 Mercenaries/MW5Mercs/Mods
 		  // ~/.steam/steam/steamapps/workshop/content/784080
 		  
-		  If(SpecialFolder.UserHome.child(".steam").child("steam").child("steamapps")._
-		    Child("common").Child("MechWarrior 5 Mercenaries").Exists) Then
-		    App.BaseDir= SpecialFolder.UserHome.child(".steam").Child("steam")_
-		    .Child("steamapps")
-		    
-		    App.manualModsFolder= App.BaseDir.Child("common").Child("MechWarrior 5 Mercenaries")_
-		    .Child("MW5Mercs").Child("Mods")
-		    
-		    App.enabledModsFile= App.manualModsFolder.child("modlist.json")
-		    
-		    App.steamModsFile= App.BaseDir.Child("workshop").Child("content").Child("784080")
-		  End
+		  App.modIDMap= New Dictionary
+		  App.modLocationMap= New Dictionary
+		  Var settingsNotGenerated As Boolean= True
+		  Var tempLaunchCommand As String
 		  
+		  // Settings generation
 		  App.savedConfigs= Utils.CreateFolderStructure(SpecialFolder.UserHome,_
 		  ".config/AlwaysOfflineSoftware/MW5LinuxModder/")
 		  
-		  App.modIDMap= New Dictionary
-		  App.modLocationMap= New Dictionary
-		  
 		  If(Not App.savedConfigs.child("settings.ini").Exists) Then
 		    Utils.WriteFile(App.savedConfigs.child("settings.ini"),"", True)
+		    settingsNotGenerated= False
 		  End
 		  
 		  App.savedSettings= App.savedConfigs.child("settings.ini")
+		  
+		  // Either read settings, detect Steam or continue to Setup
+		  If(SharedModTools.LoadSettings(0)<>"" And settingsNotGenerated) Then
+		    //Settings were not generated and are not blank
+		    // Check for valid Mw5 directory
+		    If(utils.ValidatePath(SharedModTools.LoadSettings(0))) Then
+		      App.manualModsFolder= New FolderItem(SharedModTools.LoadSettings(0))
+		      App.enabledModsFile= App.manualModsFolder.Child("modlist.json")
+		    Else
+		      Utils.GeneratePopup(1,"Invalid MW5 Directory!","A new settings file will need to be generated, "+_
+		      "Please start the app again")
+		      App.savedSettings.Remove
+		      Quit(1)
+		    End
+		    
+		    // Check for valid Steam Directory
+		    If(utils.ValidatePath(SharedModTools.LoadSettings(0))) Then
+		      App.steamModsFile= New FolderItem(SharedModTools.LoadSettings(1))
+		    Else
+		      Utils.GeneratePopup(1,"Invalid Steam Directory!",_
+		      "You will be marked as a non-Steam user, if this is a mistake please correct in File>Settings")
+		      App.steamUser= False
+		    End
+		    
+		    // Check for valid launch commands
+		    tempLaunchCommand= SharedModTools.LoadSettings(2)
+		    
+		    If(tempLaunchCommand.Trim<>"") Then
+		      If(tempLaunchCommand.Lowercase.Trim.Contains("sudo") Or _
+		        tempLaunchCommand.Lowercase.Trim.Contains("pkexec")) Then
+		        Utils.GeneratePopup(1,"Privilage Escalation Detected!!!", _
+		        "You should never need to run a videogame as an admin!")
+		        App.launchCommand= ""
+		      Else
+		        App.launchCommand= tempLaunchCommand
+		      End
+		    ElseIf(App.steamUser= True) Then
+		      App.launchCommand= "steam steam://rungameid/784080"
+		    Else
+		      App.launchCommand=""
+		    End
+		    
+		    // Validation passes go to mainscreen vs Setup
+		    MainScreen.show
+		    OpeningScreen.close
+		  Else
+		    // Steam auto-detection
+		    If(Utils.ValidatePath("~/.steam/steam/steamapps/common/MechWarrior 5 Mercenaries/MW5Mercs/Mods")) Then
+		      System.DebugLog("Found MW5!")
+		      App.manualModsFolder= SpecialFolder.UserHome.child(".steam").Child("steam")_
+		      .Child("steamapps").Child("common").Child("MechWarrior 5 Mercenaries")_
+		      .Child("MW5Mercs").Child("Mods")
+		      App.enabledModsFile= App.manualModsFolder.child("modlist.json")
+		      
+		      If(Utils.ValidatePath("~/.steam/steam/steamapps/workshop/content/784080")) Then
+		        System.DebugLog("Found Steam Mods!")
+		        App.steamModsFile= SpecialFolder.UserHome.child(".steam").Child("steam")_
+		        .Child("steamapps").Child("workshop").Child("content").Child("784080")
+		        App.launchCommand="steam steam://rungameid/784080"
+		        
+		        App.enabledModsFile= App.manualModsFolder.Child("modlist.json")
+		        SharedModTools.SaveSettings(App.manualModsFolder.NativePath,App.steamModsFile.NativePath,_
+		        App.launchCommand)
+		        
+		        MainScreen.show
+		        OpeningScreen.close
+		      End
+		    End
+		  End
 		  
 		End Sub
 	#tag EndMethod

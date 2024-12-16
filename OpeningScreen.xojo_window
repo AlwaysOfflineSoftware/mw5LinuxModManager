@@ -10,7 +10,7 @@ Begin DesktopWindow OpeningScreen
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   176
+   Height          =   214
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
@@ -257,7 +257,7 @@ Begin DesktopWindow OpeningScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   129
+      Top             =   167
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -288,7 +288,7 @@ Begin DesktopWindow OpeningScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   130
+      Top             =   167
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -296,7 +296,7 @@ Begin DesktopWindow OpeningScreen
    End
    Begin DesktopLabel lbl_status
       AllowAutoDeactivate=   True
-      Bold            =   False
+      Bold            =   True
       Enabled         =   True
       FontName        =   "System"
       FontSize        =   0.0
@@ -322,7 +322,7 @@ Begin DesktopWindow OpeningScreen
       Tooltip         =   ""
       Top             =   20
       Transparent     =   False
-      Underline       =   False
+      Underline       =   True
       Visible         =   True
       Width           =   696
    End
@@ -348,13 +348,86 @@ Begin DesktopWindow OpeningScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   130
+      Top             =   168
       Transparent     =   False
       Underline       =   False
       Value           =   False
       Visible         =   True
       VisualState     =   0
       Width           =   142
+   End
+   Begin DesktopTextField txt_LaunchCommand
+      AllowAutoDeactivate=   True
+      AllowFocusRing  =   True
+      AllowSpellChecking=   False
+      AllowTabs       =   False
+      BackgroundColor =   &cFFFFFF
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "Liberation Sans"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Format          =   ""
+      HasBorder       =   True
+      Height          =   27
+      Hint            =   "steam steam://rungameid/784080"
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   147
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
+      MaximumCharactersAllowed=   0
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   12
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextAlignment   =   0
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   130
+      Transparent     =   False
+      Underline       =   False
+      ValidationMask  =   ""
+      Visible         =   True
+      Width           =   477
+   End
+   Begin DesktopLabel lbl_LaunchCommand
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "Liberation Sans"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   27
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   2
+      Selectable      =   False
+      TabIndex        =   13
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Launch Command:"
+      TextAlignment   =   0
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   130
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   131
    End
 End
 #tag EndDesktopWindow
@@ -363,24 +436,6 @@ End
 	#tag Event
 		Sub Opening()
 		  Mw5ModHandler.Startup
-		  
-		  Var settingsArr() As String= Utils.ReadFile(App.savedSettings.NativePath).Split(EndOfLine)
-		  
-		  If(settingsArr(0)="") Then
-		    txt_NexusModFolder.Text="" 
-		    txt_SteamModsFolder.Text="" 
-		  Else
-		    txt_NexusModFolder.Text=settingsArr(0)
-		    txt_SteamModsFolder.Text=settingsArr(1)
-		  End
-		  
-		  If(SpecialFolder.UserHome.child(".steam").child("steam").child("steamapps")._
-		    Child("common").Child("MechWarrior 5 Mercenaries").Exists) Then
-		    System.DebugLog("Found MW5!")
-		    MainScreen.show
-		    OpeningScreen.close
-		  End
-		  
 		End Sub
 	#tag EndEvent
 
@@ -390,7 +445,13 @@ End
 #tag Events btn_BrowseSteam
 	#tag Event
 		Sub Pressed()
-		  Self.txt_SteamModsFolder.Text= Utils.SelectTargetDialog("home",True).NativePath
+		  
+		  Var selectedDirectory As FolderItem= Utils.SelectTargetDialog("home",True)
+		  
+		  
+		  If(selectedDirectory<>Nil And selectedDirectory.Exists) Then
+		    Self.txt_SteamModsFolder.Text= selectedDirectory.NativePath
+		  End
 		  
 		End Sub
 	#tag EndEvent
@@ -398,8 +459,12 @@ End
 #tag Events btn_BrowseNexus
 	#tag Event
 		Sub Pressed()
-		  Self.txt_NexusModFolder.text= Utils.SelectTargetDialog("home",True).NativePath
+		  Var selectedDirectory As FolderItem= Utils.SelectTargetDialog("home",True)
 		  
+		  
+		  If(selectedDirectory<>Nil And selectedDirectory.Exists) Then
+		    Self.txt_NexusModFolder.Text= selectedDirectory.NativePath
+		  End
 		  
 		End Sub
 	#tag EndEvent
@@ -408,18 +473,33 @@ End
 	#tag Event
 		Sub Pressed()
 		  If(Self.txt_NexusModFolder.Text.Trim<>"") Then
-		    Utils.WriteFile(App.savedSettings,Self.txt_NexusModFolder.Text,True)
-		    Utils.WriteFile(App.savedSettings,Self.txt_SteamModsFolder.Text,False)
 		    
 		    App.manualModsFolder= New FolderItem(Self.txt_NexusModFolder.Text.Trim)
 		    App.enabledModsFile= App.manualModsFolder.Child("modlist.json")
 		    
-		    If(chk_NotSteamUser.Value=False And Self.txt_SteamModsFolder.Text.Trim<>"") Then
+		    If(chk_NotSteamUser.Value=False And Self.txt_SteamModsFolder.Text.Trim<>"Non-Steam User") Then
 		      App.steamModsFile= New FolderItem(Self.txt_SteamModsFolder.Text.Trim)
 		    Else
 		      App.steamUser=False
 		    End
 		    
+		    If(Self.txt_LaunchCommand.Text.Trim<>"") Then
+		      If(Self.txt_LaunchCommand.Text.Lowercase.Trim.Contains("sudo") Or _
+		        Self.txt_LaunchCommand.Text.Lowercase.Trim.Contains("pkexec")) Then
+		        Utils.GeneratePopup(1,"Privilage Escalation Detected!!!", _
+		        "You should never need to run a videogame as an admin!")
+		        App.launchCommand= ""
+		      Else
+		        App.launchCommand= Self.txt_LaunchCommand.Text.Trim
+		      End
+		    ElseIf(Self.chk_NotSteamUser.Value= False) Then
+		      App.launchCommand= "steam steam://rungameid/784080"
+		    Else
+		      App.launchCommand=""
+		    End
+		    
+		    SharedModTools.SaveSettings(Self.txt_NexusModFolder.Text.Trim,Self.txt_SteamModsFolder.Text.Trim,_
+		    App.launchCommand.Trim)
 		    MainScreen.show
 		    OpeningScreen.Close
 		    
@@ -445,11 +525,15 @@ End
 		  If(Me.value= True) Then
 		    Self.txt_SteamModsFolder.Enabled= False
 		    Self.btn_BrowseSteam.Enabled= False
+		    txt_SteamModsFolder.Text= "Non-Steam User"
 		  Else
 		    Self.txt_SteamModsFolder.Enabled= True
 		    Self.btn_BrowseSteam.Enabled= True
+		    If(Utils.ValidatePath("~/.steam/steam/steamapps/workshop/content/784080")) Then
+		      txt_SteamModsFolder.Text= SpecialFolder.UserHome.child(".steam").Child("steam")_
+		      .Child("steamapps").Child("workshop").Child("content").Child("784080").NativePath
+		    End
 		  End
-		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents

@@ -10,7 +10,7 @@ Begin DesktopWindow SettingsScreen
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   182
+   Height          =   224
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
@@ -38,7 +38,7 @@ Begin DesktopWindow SettingsScreen
       Format          =   ""
       HasBorder       =   True
       Height          =   27
-      Hint            =   ""
+      Hint            =   ".../steamapps/common/MechWarrior 5 Mercenaries/MW5Mercs/Mods"
       Index           =   -2147483648
       Italic          =   False
       Left            =   172
@@ -79,10 +79,10 @@ Begin DesktopWindow SettingsScreen
       Format          =   ""
       HasBorder       =   True
       Height          =   27
-      Hint            =   ""
+      Hint            =   "~/.steam/steam/steamapps/workshop/content/784080"
       Index           =   -2147483648
       Italic          =   False
-      Left            =   112
+      Left            =   172
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -104,7 +104,7 @@ Begin DesktopWindow SettingsScreen
       Underline       =   False
       ValidationMask  =   ""
       Visible         =   True
-      Width           =   520
+      Width           =   460
    End
    Begin DesktopLabel lbl_Nexus
       AllowAutoDeactivate=   True
@@ -148,7 +148,7 @@ Begin DesktopWindow SettingsScreen
       Height          =   27
       Index           =   -2147483648
       Italic          =   False
-      Left            =   20
+      Left            =   72
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -168,7 +168,7 @@ Begin DesktopWindow SettingsScreen
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   100
+      Width           =   88
    End
    Begin DesktopButton btn_BrowseSteam
       AllowAutoDeactivate=   True
@@ -257,7 +257,7 @@ Begin DesktopWindow SettingsScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   136
+      Top             =   178
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -288,38 +288,7 @@ Begin DesktopWindow SettingsScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   136
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   80
-   End
-   Begin DesktopButton btn_Defaults
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Cancel          =   False
-      Caption         =   "Defaults"
-      Default         =   False
-      Enabled         =   True
-      FontName        =   "Liberation Sans"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   26
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   20
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   False
-      MacButtonStyle  =   0
-      Scope           =   0
-      TabIndex        =   8
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   98
+      Top             =   178
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -338,7 +307,7 @@ Begin DesktopWindow SettingsScreen
       Height          =   26
       Index           =   -2147483648
       Italic          =   False
-      Left            =   597
+      Left            =   589
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   False
@@ -350,7 +319,7 @@ Begin DesktopWindow SettingsScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   "Did you mess something up so bad you wish you could just take it all back? If so please press this!"
-      Top             =   136
+      Top             =   178
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -363,15 +332,15 @@ Begin DesktopWindow SettingsScreen
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
-      Height          =   20
+      Height          =   26
       Index           =   -2147483648
       Italic          =   False
-      Left            =   112
-      LockBottom      =   False
+      Left            =   20
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
-      LockTop         =   True
+      LockTop         =   False
       Multiline       =   False
       Scope           =   0
       Selectable      =   False
@@ -382,11 +351,11 @@ Begin DesktopWindow SettingsScreen
       TextAlignment   =   0
       TextColor       =   &c000000
       Tooltip         =   ""
-      Top             =   104
+      Top             =   137
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   512
+      Width           =   696
    End
    Begin DesktopCheckBox chk_NotSteamUser
       AllowAutoDeactivate=   True
@@ -399,7 +368,7 @@ Begin DesktopWindow SettingsScreen
       Height          =   26
       Index           =   -2147483648
       Italic          =   False
-      Left            =   212
+      Left            =   204
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
@@ -410,7 +379,7 @@ Begin DesktopWindow SettingsScreen
       TabPanelIndex   =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   136
+      Top             =   178
       Transparent     =   False
       Underline       =   False
       Value           =   False
@@ -418,23 +387,96 @@ Begin DesktopWindow SettingsScreen
       VisualState     =   0
       Width           =   142
    End
+   Begin DesktopTextField txt_LaunchCommand
+      AllowAutoDeactivate=   True
+      AllowFocusRing  =   True
+      AllowSpellChecking=   False
+      AllowTabs       =   False
+      BackgroundColor =   &cFFFFFF
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "Liberation Sans"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Format          =   ""
+      HasBorder       =   True
+      Height          =   27
+      Hint            =   "steam steam://rungameid/784080"
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   172
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
+      MaximumCharactersAllowed=   0
+      Password        =   False
+      ReadOnly        =   False
+      Scope           =   0
+      TabIndex        =   12
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   ""
+      TextAlignment   =   0
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   98
+      Transparent     =   False
+      Underline       =   False
+      ValidationMask  =   ""
+      Visible         =   True
+      Width           =   460
+   End
+   Begin DesktopLabel lbl_LaunchCommand
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "Liberation Sans"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   27
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   45
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Multiline       =   False
+      Scope           =   2
+      Selectable      =   False
+      TabIndex        =   13
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Launch Command:"
+      TextAlignment   =   0
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   98
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   115
+   End
 End
 #tag EndDesktopWindow
 
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  Var settingsArr() As String= Utils.ReadFile(App.savedSettings.NativePath).Split(EndOfLine)
 		  
-		  If(settingsArr(0)="") Then
-		    txt_NexusModFolder.Text=App.manualModsFolder.NativePath
-		    txt_SteamModsFolder.Text=App.steamModsFile.NativePath
-		  Else
-		    txt_NexusModFolder.Text=settingsArr(0)
-		    txt_SteamModsFolder.Text=settingsArr(1)
-		  End
+		  txt_NexusModFolder.Text= SharedModTools.LoadSettings(0)
+		  txt_SteamModsFolder.Text= SharedModTools.LoadSettings(1)
+		  txt_LaunchCommand.Text= SharedModTools.LoadSettings(2)
 		  
 		  Self.chk_NotSteamUser.value= Not App.steamUser
+		  
+		  If(txt_SteamModsFolder.Text= "Non-Steam User") Then
+		    Self.chk_NotSteamUser.value= True
+		  End
+		  
 		End Sub
 	#tag EndEvent
 
@@ -444,7 +486,13 @@ End
 #tag Events btn_BrowseSteam
 	#tag Event
 		Sub Pressed()
-		  Self.txt_SteamModsFolder.Text= Utils.SelectTargetDialog("home",True).NativePath
+		  
+		  Var selectedDirectory As FolderItem= Utils.SelectTargetDialog("home",True)
+		  
+		  
+		  If(selectedDirectory<>Nil And selectedDirectory.Exists) Then
+		    Self.txt_SteamModsFolder.Text= selectedDirectory.NativePath
+		  End
 		  
 		End Sub
 	#tag EndEvent
@@ -452,8 +500,11 @@ End
 #tag Events btn_BrowseNexus
 	#tag Event
 		Sub Pressed()
-		  Self.txt_NexusModFolder.text= Utils.SelectTargetDialog("home",True).NativePath
+		  Var selectedDirectory As FolderItem= Utils.SelectTargetDialog("home",True)
 		  
+		  If(selectedDirectory<>Nil And selectedDirectory.Exists) Then
+		    Self.txt_NexusModFolder.Text= selectedDirectory.NativePath
+		  End
 		  
 		End Sub
 	#tag EndEvent
@@ -467,9 +518,27 @@ End
 		      App.steamUser= False
 		    Else
 		      App.steamUser= True
-		      Utils.WriteFile(App.savedSettings,Self.txt_SteamModsFolder.Text,False)
 		    End
 		    
+		    If(Self.txt_LaunchCommand.Text<>"") Then
+		      If(Self.txt_LaunchCommand.Text.Trim<>"") Then
+		        If(Self.txt_LaunchCommand.Text.Lowercase.Trim.Contains("sudo") Or _
+		          Self.txt_LaunchCommand.Text.Lowercase.Trim.Contains("pkexec")) Then
+		          Utils.GeneratePopup(1,"Privilage Escalation Detected!!!", _
+		          "You should never need to run a videogame as an admin!")
+		          App.launchCommand= ""
+		        Else
+		          App.launchCommand= Self.txt_LaunchCommand.Text.Trim
+		        End
+		      Else
+		        App.launchCommand= ""
+		      End
+		    Else
+		      App.launchCommand= "steam steam://rungameid/784080"
+		    End
+		    
+		    SharedModTools.SaveSettings(Self.txt_NexusModFolder.Text.Trim,Self.txt_SteamModsFolder.Text.Trim,_
+		    Self.txt_LaunchCommand.Text.Trim)
 		    lbl_status.Text="Saved Successfully"
 		    
 		    Mw5ModHandler.ReloadMods
@@ -492,17 +561,6 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events btn_Defaults
-	#tag Event
-		Sub Pressed()
-		  txt_NexusModFolder.Text=App.BaseDir.Child("common").Child("MechWarrior 5 Mercenaries")_
-		  .Child("MW5Mercs").Child("Mods").NativePath
-		  
-		  txt_SteamModsFolder.Text=App.BaseDir.Child("workshop").Child("content").Child("784080").NativePath
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events btn_HardReset
 	#tag Event
 		Sub Pressed()
@@ -518,11 +576,15 @@ End
 		  If(Me.value= True) Then
 		    Self.txt_SteamModsFolder.Enabled= False
 		    Self.btn_BrowseSteam.Enabled= False
+		    txt_SteamModsFolder.Text= "Non-Steam User"
 		  Else
 		    Self.txt_SteamModsFolder.Enabled= True
 		    Self.btn_BrowseSteam.Enabled= True
+		    If(Utils.ValidatePath("~/.steam/steam/steamapps/workshop/content/784080")) Then
+		      txt_SteamModsFolder.Text= SpecialFolder.UserHome.child(".steam").Child("steam")_
+		      .Child("steamapps").Child("workshop").Child("content").Child("784080").NativePath
+		    End
 		  End
-		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
