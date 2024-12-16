@@ -125,7 +125,7 @@ Begin DesktopWindow MainScreen
       TabIndex        =   9
       TabPanelIndex   =   0
       TabStop         =   True
-      Tooltip         =   "Steam users can launch the game here!"
+      Tooltip         =   "Use a launch command to run MW5 here!"
       Top             =   354
       Transparent     =   False
       Underline       =   False

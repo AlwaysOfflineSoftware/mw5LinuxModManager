@@ -483,20 +483,7 @@ End
 		      App.steamUser=False
 		    End
 		    
-		    If(Self.txt_LaunchCommand.Text.Trim<>"") Then
-		      If(Self.txt_LaunchCommand.Text.Lowercase.Trim.Contains("sudo") Or _
-		        Self.txt_LaunchCommand.Text.Lowercase.Trim.Contains("pkexec")) Then
-		        Utils.GeneratePopup(1,"Privilage Escalation Detected!!!", _
-		        "You should never need to run a videogame as an admin!")
-		        App.launchCommand= ""
-		      Else
-		        App.launchCommand= Self.txt_LaunchCommand.Text.Trim
-		      End
-		    ElseIf(Self.chk_NotSteamUser.Value= False) Then
-		      App.launchCommand= "steam steam://rungameid/784080"
-		    Else
-		      App.launchCommand=""
-		    End
+		    App.launchCommand= SharedModTools.PrivilegeCommandCheck(SharedModTools.LoadSettings(2))
 		    
 		    SharedModTools.SaveSettings(Self.txt_NexusModFolder.Text.Trim,Self.txt_SteamModsFolder.Text.Trim,_
 		    App.launchCommand.Trim)

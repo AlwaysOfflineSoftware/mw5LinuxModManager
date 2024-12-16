@@ -353,7 +353,6 @@ Protected Module Mw5ModHandler
 		  App.modIDMap= New Dictionary
 		  App.modLocationMap= New Dictionary
 		  Var settingsNotGenerated As Boolean= True
-		  Var tempLaunchCommand As String
 		  
 		  // Settings generation
 		  App.savedConfigs= Utils.CreateFolderStructure(SpecialFolder.UserHome,_
@@ -390,22 +389,7 @@ Protected Module Mw5ModHandler
 		    End
 		    
 		    // Check for valid launch commands
-		    tempLaunchCommand= SharedModTools.LoadSettings(2)
-		    
-		    If(tempLaunchCommand.Trim<>"") Then
-		      If(tempLaunchCommand.Lowercase.Trim.Contains("sudo") Or _
-		        tempLaunchCommand.Lowercase.Trim.Contains("pkexec")) Then
-		        Utils.GeneratePopup(1,"Privilage Escalation Detected!!!", _
-		        "You should never need to run a videogame as an admin!")
-		        App.launchCommand= ""
-		      Else
-		        App.launchCommand= tempLaunchCommand
-		      End
-		    ElseIf(App.steamUser= True) Then
-		      App.launchCommand= "steam steam://rungameid/784080"
-		    Else
-		      App.launchCommand=""
-		    End
+		    App.launchCommand= SharedModTools.PrivilegeCommandCheck(SharedModTools.LoadSettings(2))
 		    
 		    // Validation passes go to mainscreen vs Setup
 		    MainScreen.show

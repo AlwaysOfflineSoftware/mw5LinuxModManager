@@ -82,7 +82,7 @@ Protected Module SharedModTools
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub populateLoadouts()
+		Sub PopulateLoadouts()
 		  MainScreen.pop_SavedLoadouts.RemoveAllRows
 		  MainScreen.pop_SavedLoadouts.AddRow("<new>")
 		  
@@ -95,6 +95,28 @@ Protected Module SharedModTools
 		    End
 		  Next
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function PrivilegeCommandCheck(riskyLaunchCommand as String) As String
+		  Var tempLaunchCommand As String= riskyLaunchCommand
+		  
+		  System.DebugLog(tempLaunchCommand)
+		  If(tempLaunchCommand.Trim<>"") Then
+		    If(tempLaunchCommand.Lowercase.Trim.Contains("sudo") Or _
+		      tempLaunchCommand.Lowercase.Trim.Contains("pkexec")) Then
+		      Utils.GeneratePopup(1,"Privilege Escalation Detected!!!", _
+		      "You should never need to run a videogame as an admin!")
+		      Return ""
+		    Else
+		      Return tempLaunchCommand.Trim
+		    End
+		  ElseIf(App.steamUser= True AND tempLaunchCommand.Trim="") Then
+		    Return "steam steam://rungameid/784080"
+		  Else
+		    Return ""
+		  End
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0

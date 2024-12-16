@@ -520,27 +520,20 @@ End
 		      App.steamUser= True
 		    End
 		    
-		    If(Self.txt_LaunchCommand.Text<>"") Then
-		      If(Self.txt_LaunchCommand.Text.Trim<>"") Then
-		        If(Self.txt_LaunchCommand.Text.Lowercase.Trim.Contains("sudo") Or _
-		          Self.txt_LaunchCommand.Text.Lowercase.Trim.Contains("pkexec")) Then
-		          Utils.GeneratePopup(1,"Privilage Escalation Detected!!!", _
-		          "You should never need to run a videogame as an admin!")
-		          App.launchCommand= ""
-		        Else
-		          App.launchCommand= Self.txt_LaunchCommand.Text.Trim
-		        End
-		      Else
-		        App.launchCommand= ""
-		      End
-		    Else
-		      App.launchCommand= "steam steam://rungameid/784080"
-		    End
+		    App.launchCommand= SharedModTools.PrivilegeCommandCheck(txt_LaunchCommand.Text)
 		    
 		    SharedModTools.SaveSettings(Self.txt_NexusModFolder.Text.Trim,Self.txt_SteamModsFolder.Text.Trim,_
 		    App.launchCommand.Trim)
 		    lbl_status.Text="Saved Successfully"
 		    
+		    If(App.steamUser And App.launchCommand="steam steam://rungameid/784080") Then
+		      MainScreen.btn_LaunchGame.Enabled= True
+		    ElseIf(App.launchCommand<>"steam steam://rungameid/784080" And _
+		      App.launchCommand<>"") Then
+		      MainScreen.btn_LaunchGame.Enabled= True
+		    Else
+		      MainScreen.btn_LaunchGame.Enabled= False
+		    End
 		    Mw5ModHandler.ReloadMods
 		    SettingsScreen.close
 		    
