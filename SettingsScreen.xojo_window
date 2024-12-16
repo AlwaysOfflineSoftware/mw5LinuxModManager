@@ -538,7 +538,7 @@ End
 		    End
 		    
 		    SharedModTools.SaveSettings(Self.txt_NexusModFolder.Text.Trim,Self.txt_SteamModsFolder.Text.Trim,_
-		    Self.txt_LaunchCommand.Text.Trim)
+		    App.launchCommand.Trim)
 		    lbl_status.Text="Saved Successfully"
 		    
 		    Mw5ModHandler.ReloadMods
