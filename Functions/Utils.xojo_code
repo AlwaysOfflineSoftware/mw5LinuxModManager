@@ -6,11 +6,11 @@ Protected Module Utils
 		  
 		  // remove any leading/trailing slashes
 		  If(path.Right(1)="/") Then 
-		    path=path.Left(Len(path)-1) // cannot have / on the end
+		    path= path.Left(Len(path)-1) // cannot have / on the end
 		  End
 		  
 		  If(path.Left(1)="/") Then 
-		    path=path.Mid(2)
+		    path= path.Mid(2)
 		  End 
 		  
 		  // split on remaining /

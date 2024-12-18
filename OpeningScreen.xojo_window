@@ -472,7 +472,8 @@ End
 #tag Events btn_Next
 	#tag Event
 		Sub Pressed()
-		  If(Self.txt_NexusModFolder.Text.Trim<>"") Then
+		  If(Self.txt_NexusModFolder.Text.Trim<>"" And _
+		    Utils.ValidatePath(Self.txt_NexusModFolder.Text.Trim)) Then
 		    
 		    App.manualModsFolder= New FolderItem(Self.txt_NexusModFolder.Text.Trim)
 		    App.enabledModsFile= App.manualModsFolder.Child("modlist.json")

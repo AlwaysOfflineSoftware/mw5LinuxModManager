@@ -460,6 +460,37 @@ Begin DesktopWindow SettingsScreen
       Visible         =   True
       Width           =   115
    End
+   Begin DesktopButton btn_SteamDefault
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Cancel          =   False
+      Caption         =   "Steam"
+      Default         =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   26
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   644
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      MacButtonStyle  =   0
+      Scope           =   0
+      TabIndex        =   14
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   "Set the default launch command for Steam"
+      Top             =   98
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   80
+   End
 End
 #tag EndDesktopWindow
 
@@ -486,9 +517,7 @@ End
 #tag Events btn_BrowseSteam
 	#tag Event
 		Sub Pressed()
-		  
 		  Var selectedDirectory As FolderItem= Utils.SelectTargetDialog("home",True)
-		  
 		  
 		  If(selectedDirectory<>Nil And selectedDirectory.Exists) Then
 		    Self.txt_SteamModsFolder.Text= selectedDirectory.NativePath
@@ -569,15 +598,24 @@ End
 		  If(Me.value= True) Then
 		    Self.txt_SteamModsFolder.Enabled= False
 		    Self.btn_BrowseSteam.Enabled= False
+		    Self.btn_SteamDefault.Enabled= False
 		    txt_SteamModsFolder.Text= "Non-Steam User"
 		  Else
 		    Self.txt_SteamModsFolder.Enabled= True
 		    Self.btn_BrowseSteam.Enabled= True
+		    Self.btn_SteamDefault.Enabled= True
 		    If(Utils.ValidatePath("~/.steam/steam/steamapps/workshop/content/784080")) Then
 		      txt_SteamModsFolder.Text= SpecialFolder.UserHome.child(".steam").Child("steam")_
 		      .Child("steamapps").Child("workshop").Child("content").Child("784080").NativePath
 		    End
 		  End
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btn_SteamDefault
+	#tag Event
+		Sub Pressed()
+		  Self.txt_LaunchCommand.Text="steam steam://rungameid/784080"
 		End Sub
 	#tag EndEvent
 #tag EndEvents

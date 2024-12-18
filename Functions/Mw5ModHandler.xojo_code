@@ -358,12 +358,14 @@ Protected Module Mw5ModHandler
 		  App.savedConfigs= Utils.CreateFolderStructure(SpecialFolder.UserHome,_
 		  ".config/AlwaysOfflineSoftware/MW5LinuxModder/")
 		  
-		  If(Not App.savedConfigs.child("settings.ini").Exists) Then
+		  If(App.savedConfigs.child("settings.ini").Exists) Then
+		    App.savedSettings= App.savedConfigs.child("settings.ini")
+		  Else
 		    Utils.WriteFile(App.savedConfigs.child("settings.ini"),"", True)
+		    App.savedSettings= App.savedConfigs.child("settings.ini")
 		    settingsNotGenerated= False
 		  End
 		  
-		  App.savedSettings= App.savedConfigs.child("settings.ini")
 		  
 		  // Either read settings, detect Steam or continue to Setup
 		  If(SharedModTools.LoadSettings(0)<>"" And settingsNotGenerated) Then

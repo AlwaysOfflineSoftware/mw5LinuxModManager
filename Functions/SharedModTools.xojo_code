@@ -101,7 +101,7 @@ Protected Module SharedModTools
 		Function PrivilegeCommandCheck(riskyLaunchCommand as String) As String
 		  Var tempLaunchCommand As String= riskyLaunchCommand
 		  
-		  System.DebugLog(tempLaunchCommand)
+		  // System.DebugLog(tempLaunchCommand)
 		  If(tempLaunchCommand.Trim<>"") Then
 		    If(tempLaunchCommand.Lowercase.Trim.Contains("sudo") Or _
 		      tempLaunchCommand.Lowercase.Trim.Contains("pkexec")) Then
@@ -116,6 +116,7 @@ Protected Module SharedModTools
 		  Else
 		    Return ""
 		  End
+		  
 		End Function
 	#tag EndMethod
 
@@ -138,6 +139,7 @@ Protected Module SharedModTools
 		  Var FileContent As String= GenerateJSON(App.modLocationMap, True)
 		  
 		  Utils.WriteFile(App.savedConfigs.Child(profileName + ".txt"),FileContent,True)
+		  
 		End Sub
 	#tag EndMethod
 
