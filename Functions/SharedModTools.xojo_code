@@ -39,10 +39,10 @@ Protected Module SharedModTools
 	#tag Method, Flags = &h0
 		Sub LoadModLoadout(profileName as String)
 		  Var jsonText As String= Utils.ReadFile(App.savedConfigs.child(profileName + ".txt"))
-		  
+		  MainScreen.lsb_ModOrderList.RemoveAllRows
 		  App.modLocationMap= ParseJSON(jsonText)
-		  
 		  Mw5ModHandler.RefreshFromDict()
+		  
 		End Sub
 	#tag EndMethod
 

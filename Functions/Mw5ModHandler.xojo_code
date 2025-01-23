@@ -140,7 +140,7 @@ Protected Module Mw5ModHandler
 		Sub RefreshFromDict()
 		  Var modName As String
 		  Var modOrder As String
-		  Var modID As Integer
+		  Var modID As String
 		  Var steamMod As Boolean= False
 		  Var tempDict As Dictionary 
 		  Var pathString() As String
@@ -152,25 +152,33 @@ Protected Module Mw5ModHandler
 		    If(tempDict.HasKey("displayName") And tempDict.HasKey("defaultLoadOrder")) Then
 		      modName= pathString(pathString.LastIndex-1) //tempDict.Lookup("displayName","ERR")
 		      modOrder= tempDict.Lookup("defaultLoadOrder","ERR")
+		      modID= modName.Left(2).Lowercase + modName.Right(2).Lowercase +_
+		      modName.Length.ToString
 		      
-		      If(modKey.Contains(App.steamModsFile.NativePath)) Then
-		        MainScreen.lsb_ModOrderList.AddRow("",modID.ToString,_
-		        modName.Replace(",","").Trim,_
-		        modOrder.ReplaceAll(",","").ReplaceAll(".0","").Trim,"Y")
-		        App.modIDMap.Value(modID)=modName.Replace(",","").Trim
-		        modID= modID+1
+		      If(App.steamUser) Then
+		        If(modKey.Contains(App.steamModsFile.NativePath)) Then
+		          modID= pathString(pathString.LastIndex-1)
+		          modName= tempDict.Lookup("displayName","ERR")
+		          MainScreen.lsb_ModOrderList.AddRow("",modID,_
+		          modName.Replace(",","").Trim,_
+		          modOrder.ReplaceAll(",","").ReplaceAll(".0","").Trim," ","Y")
+		          App.modIDMap.Value(modID)=modName.Replace(",","").Trim
+		        Else
+		          MainScreen.lsb_ModOrderList.AddRow("",modID,_
+		          modName.Replace(",","").Trim,_
+		          modOrder.ReplaceAll(",","").ReplaceAll(".0","").Trim," "," ")
+		          App.modIDMap.Value(modID)=modName.Replace(",","").Trim
+		        End
 		      Else
-		        MainScreen.lsb_ModOrderList.AddRow("",modID.ToString,_
+		        MainScreen.lsb_ModOrderList.AddRow("",modID,_
 		        modName.Replace(",","").Trim,_
 		        modOrder.ReplaceAll(",","").ReplaceAll(".0","").Trim," ")
 		        App.modIDMap.Value(modID)=modName.Replace(",","").Trim
-		        modID= modID+1
 		      End
 		      
 		    Else
 		      MainScreen.lsb_ModOrderList.AddRow("???","???",_
 		      "???","???","???","Y")
-		      modID= modID+1
 		    End
 		  Next
 		  
