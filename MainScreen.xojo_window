@@ -109,7 +109,7 @@ Begin DesktopWindow MainScreen
       Default         =   False
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   26
       Index           =   -2147483648
@@ -140,7 +140,7 @@ Begin DesktopWindow MainScreen
       Default         =   False
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   28
       Index           =   -2147483648
@@ -171,7 +171,7 @@ Begin DesktopWindow MainScreen
       Default         =   False
       Enabled         =   False
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   28
       Index           =   -2147483648
@@ -199,7 +199,7 @@ Begin DesktopWindow MainScreen
       Bold            =   False
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   28
       Index           =   -2147483648
@@ -231,7 +231,7 @@ Begin DesktopWindow MainScreen
       Default         =   False
       Enabled         =   False
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   28
       Index           =   -2147483648
@@ -290,7 +290,7 @@ Begin DesktopWindow MainScreen
       Default         =   False
       Enabled         =   True
       FontName        =   "System"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   26
       Index           =   -2147483648
@@ -321,7 +321,7 @@ Begin DesktopWindow MainScreen
       Default         =   False
       Enabled         =   True
       FontName        =   "System"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   26
       Index           =   -2147483648
@@ -359,7 +359,7 @@ Begin DesktopWindow MainScreen
       CaptionPosition =   1
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       HasBackgroundColor=   True
       Height          =   26
@@ -409,7 +409,7 @@ Begin DesktopWindow MainScreen
       CaptionPosition =   1
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       HasBackgroundColor=   True
       Height          =   26
@@ -459,7 +459,7 @@ Begin DesktopWindow MainScreen
       CaptionPosition =   1
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       HasBackgroundColor=   True
       Height          =   26
@@ -509,7 +509,7 @@ Begin DesktopWindow MainScreen
       CaptionPosition =   1
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       HasBackgroundColor=   True
       Height          =   26
@@ -578,6 +578,15 @@ End
 		    Me.btn_LaunchGame.Enabled= False
 		  End
 		  
+		  If(Color.IsDarkMode) Then
+		    Self.btn_Refresh.BackgroundColor= Color.RGB(69,69,69)
+		    Self.btn_Apply.BackgroundColor= Color.RGB(69,69,69)
+		    Self.btn_Install.BackgroundColor= Color.RGB(69,69,69)
+		  Else
+		    Self.btn_Refresh.BackgroundColor= Color.RGB(250,250,250)
+		    Self.btn_Apply.BackgroundColor= Color.RGB(250,250,250)
+		    Self.btn_Install.BackgroundColor= Color.RGB(250,250,250)
+		  End
 		End Sub
 	#tag EndEvent
 
@@ -839,7 +848,11 @@ End
 		  End
 		  
 		  SharedModTools.SaveModLoadout("default")
-		  Me.BackgroundColor= Color.RGB(69,69,69)
+		  If(Color.IsDarkMode) Then
+		    Me.BackgroundColor= Color.RGB(69,69,69)
+		  Else
+		    Me.BackgroundColor= Color.RGB(250,250,250)
+		  End
 		End Function
 	#tag EndEvent
 #tag EndEvents
@@ -847,7 +860,7 @@ End
 	#tag Event
 		Function MouseDown(X As Integer, Y As Integer) As Boolean
 		  
-		  Me.BackgroundColor= Color.RGB(0,65,125)
+		  Me.BackgroundColor= Color.RGB(2,65,135)
 		  Return True
 		  
 		End Function
@@ -867,7 +880,11 @@ End
 		    End
 		  End
 		  
-		  Me.BackgroundColor= Color.RGB(69,69,69)
+		  If(Color.IsDarkMode) Then
+		    Me.BackgroundColor= Color.RGB(69,69,69)
+		  Else
+		    Me.BackgroundColor= Color.RGB(250,250,250)
+		  End
 		End Function
 	#tag EndEvent
 #tag EndEvents
@@ -883,7 +900,12 @@ End
 	#tag Event
 		Function MouseUp(X As Integer, Y As Integer) As Boolean
 		  Mw5ModHandler.ReloadMods
-		  Me.BackgroundColor= Color.RGB(69,69,69)
+		  
+		  If(Color.IsDarkMode) Then
+		    Me.BackgroundColor= Color.RGB(69,69,69)
+		  Else
+		    Me.BackgroundColor= Color.RGB(250,250,250)
+		  End
 		End Function
 	#tag EndEvent
 #tag EndEvents

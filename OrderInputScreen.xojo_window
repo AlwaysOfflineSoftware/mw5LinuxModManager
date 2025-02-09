@@ -105,7 +105,7 @@ Begin DesktopWindow OrderInputScreen
       Default         =   True
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   27
       Index           =   -2147483648
@@ -136,7 +136,7 @@ Begin DesktopWindow OrderInputScreen
       Default         =   False
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   28
       Index           =   -2147483648

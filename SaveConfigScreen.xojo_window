@@ -32,7 +32,7 @@ Begin DesktopWindow SaveConfigScreen
       Default         =   True
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   26
       Index           =   -2147483648
@@ -63,7 +63,7 @@ Begin DesktopWindow SaveConfigScreen
       Default         =   False
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   26
       Index           =   -2147483648

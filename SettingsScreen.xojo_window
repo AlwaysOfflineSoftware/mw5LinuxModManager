@@ -111,7 +111,7 @@ Begin DesktopWindow SettingsScreen
       Bold            =   False
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   27
       Index           =   -2147483648
@@ -148,7 +148,7 @@ Begin DesktopWindow SettingsScreen
       Height          =   27
       Index           =   -2147483648
       Italic          =   False
-      Left            =   72
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -168,7 +168,7 @@ Begin DesktopWindow SettingsScreen
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   88
+      Width           =   140
    End
    Begin DesktopButton btn_BrowseSteam
       AllowAutoDeactivate=   True
@@ -178,7 +178,7 @@ Begin DesktopWindow SettingsScreen
       Default         =   False
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   26
       Index           =   -2147483648
@@ -209,7 +209,7 @@ Begin DesktopWindow SettingsScreen
       Default         =   False
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   26
       Index           =   -2147483648
@@ -240,7 +240,7 @@ Begin DesktopWindow SettingsScreen
       Default         =   True
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   26
       Index           =   -2147483648
@@ -271,7 +271,7 @@ Begin DesktopWindow SettingsScreen
       Default         =   False
       Enabled         =   True
       FontName        =   "Liberation Sans"
-      FontSize        =   0.0
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   26
       Index           =   -2147483648
@@ -301,8 +301,8 @@ Begin DesktopWindow SettingsScreen
       Caption         =   "RESET MODS"
       Default         =   False
       Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
+      FontName        =   "Liberation Sans"
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   26
       Index           =   -2147483648
@@ -329,7 +329,7 @@ Begin DesktopWindow SettingsScreen
       AllowAutoDeactivate=   True
       Bold            =   False
       Enabled         =   True
-      FontName        =   "System"
+      FontName        =   "Liberation Sans"
       FontSize        =   0.0
       FontUnit        =   0
       Height          =   26
@@ -438,7 +438,7 @@ Begin DesktopWindow SettingsScreen
       Height          =   27
       Index           =   -2147483648
       Italic          =   False
-      Left            =   45
+      Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -458,7 +458,7 @@ Begin DesktopWindow SettingsScreen
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   115
+      Width           =   140
    End
    Begin DesktopButton btn_SteamDefault
       AllowAutoDeactivate=   True
@@ -467,8 +467,8 @@ Begin DesktopWindow SettingsScreen
       Caption         =   "Steam"
       Default         =   False
       Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
+      FontName        =   "Liberation Sans"
+      FontSize        =   14.0
       FontUnit        =   0
       Height          =   26
       Index           =   -2147483648
