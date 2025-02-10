@@ -521,11 +521,11 @@ Begin DesktopWindow MainScreen
       InitialParent   =   ""
       Italic          =   False
       Left            =   20
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
-      LockTop         =   True
+      LockTop         =   False
       MenuStyle       =   0
       PanelIndex      =   0
       Scope           =   0
